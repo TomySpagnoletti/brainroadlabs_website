@@ -1,0 +1,24 @@
+<style>
+    .gradient-border {
+        position: relative;
+    }
+    
+    .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px; /* matches rounded-[20px] */
+        padding: 1px; /* border width */
+        background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+</style>
+
+<div class="landscape:w-[680px] landscape:h-[220px] portrait:w-[220px] portrait:h-[680px] bg-white/80 rounded-[20px] p-5 gradient-border">
+    <h1>Home</h1>
+</div>
