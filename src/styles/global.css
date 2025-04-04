@@ -1,1 +1,179 @@
 @import "tailwindcss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Explicitly set body text to use Geist Mono, but NOT for headings */
+body {
+  font-family: 'Geist Mono', monospace;
+  color: #4a4a66; /* Soft blue-gray that's gentle on the eyes and matches with the headers */
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* Use Geist (non-mono) for headings with custom color */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Geist', sans-serif !important;
+  color: #6254a4; /* Rich purple that complements the pink and blue gradient */
+  letter-spacing: -0.03em; /* Slightly tighter letter spacing */
+}
+
+/* Dynamic bubble background */
+:root {
+  --color1: 180, 240, 220;  /* More vivid version of #E3FDF5 */
+  --color2: 120, 220, 200;  /* Darker mint green */
+  --color3: 255, 180, 230;  /* More vivid version of #FFE6FA */
+  --color4: 240, 150, 210;  /* Deeper pink */
+  --color5: 180, 180, 255;  /* Vivid lavender blue */
+  --color-interactive: 200, 160, 255;  /* Bright purple */
+  --circle-size: 800px;  /* Fixed size instead of percentage */
+  --blending: hard-light;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+}
+
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.gradient-bg svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
+.gradients-container {
+  filter: url(#goo) blur(40px);
+  width: 100%;
+  height: 100%;
+}
+
+.g1 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending);
+  width: 1600px;
+  height: 1600px;
+  top: calc(50% - 800px);
+  left: calc(50% - 800px);
+  transform-origin: center center;
+  animation: moveVertical 30s ease infinite;
+  opacity: 1;
+}
+
+.g2 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending);
+  width: 1400px;
+  height: 1400px;
+  top: calc(50% - 700px);
+  left: calc(50% - 700px);
+  transform-origin: calc(50% - 400px);
+  animation: moveInCircle 20s reverse infinite;
+  opacity: 1;
+}
+
+.g3 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending);
+  width: 1700px;
+  height: 1700px;
+  top: calc(50% - 850px + 200px);
+  left: calc(50% - 850px - 300px);
+  transform-origin: calc(50% + 400px);
+  animation: moveInCircle 40s linear infinite;
+  opacity: 1;
+}
+
+.g4 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending);
+  width: 1500px;
+  height: 1500px;
+  top: calc(50% - 750px);
+  left: calc(50% - 750px);
+  transform-origin: calc(50% - 200px);
+  animation: moveHorizontal 40s ease infinite;
+  opacity: 0.7;
+}
+
+.g5 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending);
+  width: 2000px;
+  height: 2000px;
+  top: calc(50% - 1000px);
+  left: calc(50% - 1000px);
+  transform-origin: calc(50% - 800px) calc(50% + 200px);
+  animation: moveInCircle 20s ease infinite;
+  opacity: 1;
+}
+
+.interactive {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending);
+  width: 600px;
+  height: 600px;
+  top: 0;
+  left: 0;
+  margin-top: -300px;
+  margin-left: -300px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}

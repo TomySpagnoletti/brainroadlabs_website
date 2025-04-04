@@ -1,3 +1,23 @@
+<div class="
+    landscape:max-w-[680px]
+    landscape:max-h-[220px]
+    landscape:w-[calc(100vw-20px)]
+    landscape:h-[calc(100vh-20px)]
+    portrait:max-h-[680px]
+    portrait:max-w-[220px]
+    portrait:h-[calc(100vh-20px)]
+    portrait:w-[calc(100vw-20px)]
+    bg-white/80
+    rounded-[20px]
+    gradient-border
+    p-[0.5px]
+">
+    <div class="content-container p-2">
+        <h1 class="text-2xl font-bold mb-2">BrainRoad Labs</h1>
+        <p>Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile.</p>
+    </div>
+</div>
+
 <style>
     .gradient-border {
         position: relative;
@@ -8,17 +28,37 @@
         position: absolute;
         inset: 0;
         border-radius: 20px; /* matches rounded-[20px] */
-        padding: 1px; /* border width */
-        background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+        padding: 1px;
+        background: linear-gradient(
+            45deg, 
+            rgba(180, 240, 220, 1) 0%, 
+            rgba(120, 220, 200, 1) 25%, 
+            rgba(255, 180, 230, 1) 50%, 
+            rgba(240, 150, 210, 1) 75%, 
+            rgba(180, 180, 255, 1) 100%
+        );
+        background-size: 200% 200%;
+        animation: gradientBorder 8s ease infinite;
         -webkit-mask: 
             linear-gradient(#fff 0 0) content-box, 
             linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         pointer-events: none;
+        z-index: 1;
+    }
+    
+    @keyframes gradientBorder {
+        0% { background-position: 0% 50% }
+        50% { background-position: 100% 50% }
+        100% { background-position: 0% 50% }
+    }
+    
+    .content-container {
+        overflow: auto;
+        height: 100%;
+        position: relative;
+        z-index: 0;
+        border-radius: inherit;
     }
 </style>
-
-<div class="landscape:w-[680px] landscape:h-[220px] portrait:w-[220px] portrait:h-[680px] bg-white/80 rounded-[20px] p-5 gradient-border">
-    <h1>Home</h1>
-</div>
