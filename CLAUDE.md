@@ -42,10 +42,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Design Preferences
 - **Responsive Design**: Adapt layouts based on screen orientation using Tailwind's orientation variants
-- **UI Elements**: 
-  - Rounded corners (20px radius)
-  - Semi-transparent white backgrounds (80% opacity)
-  - Gradient accents that match the site's background gradient
-  - Clean, minimal design
-- **Background**: Gradient from light blue/green (#a8edea) to light pink (#fed6e3)
-- **Borders**: 1px borders with matching gradient colors when used
+- Clean, minimal design
+- Rounded corners (20px radius)
