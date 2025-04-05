@@ -10,6 +10,7 @@ html, body {
 /* Explicitly set body text to use Geist Mono, but NOT for headings */
 body {
   font-family: 'Geist Mono', monospace;
+  font-weight: 300;
   color: rgb(var(--color-text));
   font-size: 13px;
   line-height: 1.35;
@@ -17,39 +18,92 @@ body {
 
 /* Use Geist (non-mono) for headings with custom color */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Geist', sans-serif !important;
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
   color: rgb(var(--color-heading));
   letter-spacing: -0.03em; /* Slightly tighter letter spacing */
   text-shadow: 0 1px 2px rgba(var(--color-shadow), 0.05);
 }
 
+/* Apply font-weight 700 to strong tags using Tailwind's font-bold utility */
+strong {
+  @apply font-bold;
+}
+
+/* Style for links using the custom link color */
+a {
+  color: rgb(var(--color-link));
+  text-decoration: none;
+}
+
+/* BrainRoad Badge styles using Tailwind utilities */
+.br_badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs;
+  border: 1px solid rgba(var(--gray-border));
+}
+
+/* Badge dot color variants */
+.br_badge_green {
+  @apply mr-1 h-1.5 w-1.5 rounded-full bg-green-500;
+}
+
 /* Dynamic bubble background */
 :root {
-  /* Brand Colors */
-  --color-text: 74, 74, 102;       /* #4a4a66 - Soft blue-gray for body text */
-  --color-heading: 42, 157, 143;   /* #2a9d8f - Teal for headings */
-  --color-shadow: 0, 0, 0;         /* For rgba shadows */
-  
   /* Gradient Colors */
-  --color1: 180, 240, 220;         /* Light mint/aqua */
-  --color2: 120, 220, 200;         /* Darker mint green */
-  --color3: 255, 180, 230;         /* Light pink */
-  --color4: 240, 150, 210;         /* Deeper pink */
-  --color5: 180, 180, 255;         /* Lavender blue */
-  --color-interactive: 200, 160, 255; /* Bright purple */
+  --circle-color1: 180, 240, 220;              /* Light mint/aqua */
+  --circle-color2: 120, 220, 200;              /* Darker mint green */
+  --circle-color3: 255, 180, 230;              /* Light pink */
+  --circle-color4: 240, 150, 210;              /* Deeper pink */
+  --circle-color5: 180, 180, 255;              /* Lavender blue */
+  --circle-color-interactive: 200, 160, 255;   /* Bright purple */
   
+  /* Circle Properties */
+  --circle-blending: color-dodge;
+  --circle-opacity-bg: 0.9;
+
+  /* Brand Colors */
+  --color-text: 40, 40, 50;
+  --color-link: 139, 139, 183;          /* #8b8bb7 - Purplish blue */
+  --color-heading: 40, 40, 50;
+  --color-shadow: 0, 0, 0;              /* For rgba shadows */
+
   /* UI Properties */
-  --circle-size: 800px;            /* Fixed size instead of percentage */
-  --blending: hard-light;
   --border-radius: 20px;
-  --opacity-bg: 0.8;
-  --opacity-overlay: 0.35;
-  --white-opacity: 0.8;            /* For bg-white/80 and similar uses */
+  --body-total-padding: 20px;           /* 10px left and 10px right */
+  
+  /* Container Dimensions */
+  --container-landscape: 700px;         /* Max width in landscape mode */
+  --container-portrait: 300px;          /* Max width in portrait mode */
+
+  /* Border */
+  --gray-border: 80, 80, 95, 0.15;
 }
 
 .content-wrapper {
   position: relative;
   z-index: 10;
+}
+
+/* Main container for BrainRoad Labs components */
+.br_container {
+  /* Base styles for all orientations */
+  @apply bg-white rounded-[var(--border-radius)] border border-[rgba(var(--gray-border))];
+  
+  /* Landscape orientation */
+  @media (orientation: landscape) {
+    max-width: var(--container-landscape);
+    max-height: var(--container-portrait);
+    width: calc(100vw - var(--body-total-padding));
+    height: calc(100vh - var(--body-total-padding));
+  }
+  
+  /* Portrait orientation */
+  @media (orientation: portrait) {
+    max-height: var(--container-landscape);
+    max-width: var(--container-portrait);
+    width: calc(100vw - var(--body-total-padding));
+    height: calc(100vh - var(--body-total-padding));
+  }
 }
 
 .gradient-bg {
@@ -77,23 +131,10 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.noise-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper-noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-noise)' opacity='0.7'/%3E%3C/svg%3E");
-  opacity: var(--opacity-overlay);
-  z-index: 5;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-
 .g1 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color1), var(--opacity-bg)) 0, rgba(var(--color1), 0) 50%) no-repeat;
-  mix-blend-mode: var(--blending);
+  background: radial-gradient(circle at center, rgba(var(--circle-color1), var(--circle-opacity-bg)) 0, rgba(var(--circle-color1), 0) 50%) no-repeat;
+  mix-blend-mode: var(--circle-blending);
   width: 1600px;
   height: 1600px;
   top: calc(50% - 800px);
@@ -105,8 +146,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .g2 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color2), var(--opacity-bg)) 0, rgba(var(--color2), 0) 50%) no-repeat;
-  mix-blend-mode: var(--blending);
+  background: radial-gradient(circle at center, rgba(var(--circle-color2), var(--circle-opacity-bg)) 0, rgba(var(--circle-color2), 0) 50%) no-repeat;
+  mix-blend-mode: var(--circle-blending);
   width: 1400px;
   height: 1400px;
   top: calc(50% - 700px);
@@ -118,8 +159,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .g3 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color3), var(--opacity-bg)) 0, rgba(var(--color3), 0) 50%) no-repeat;
-  mix-blend-mode: var(--blending);
+  background: radial-gradient(circle at center, rgba(var(--circle-color3), var(--circle-opacity-bg)) 0, rgba(var(--circle-color3), 0) 50%) no-repeat;
+  mix-blend-mode: var(--circle-blending);
   width: 1700px;
   height: 1700px;
   top: calc(50% - 850px + 200px);
@@ -131,8 +172,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .g4 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color4), var(--opacity-bg)) 0, rgba(var(--color4), 0) 50%) no-repeat;
-  mix-blend-mode: var(--blending);
+  background: radial-gradient(circle at center, rgba(var(--circle-color4), var(--circle-opacity-bg)) 0, rgba(var(--circle-color4), 0) 50%) no-repeat;
+  mix-blend-mode: var(--circle-blending);
   width: 1500px;
   height: 1500px;
   top: calc(50% - 750px);
@@ -144,8 +185,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .g5 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color5), var(--opacity-bg)) 0, rgba(var(--color5), 0) 50%) no-repeat;
-  mix-blend-mode: var(--blending);
+  background: radial-gradient(circle at center, rgba(var(--circle-color5), var(--circle-opacity-bg)) 0, rgba(var(--circle-color5), 0) 50%) no-repeat;
+  mix-blend-mode: var(--circle-blending);
   width: 2000px;
   height: 2000px;
   top: calc(50% - 1000px);
@@ -157,8 +198,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .interactive {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color-interactive), var(--opacity-bg)) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
-  mix-blend-mode: var(--blending);
+  background: radial-gradient(circle at center, rgba(var(--circle-color-interactive), var(--circle-opacity-bg)) 0, rgba(var(--circle-color-interactive), 0) 50%) no-repeat;
+  mix-blend-mode: var(--circle-blending);
   width: 600px;
   height: 600px;
   top: 0;

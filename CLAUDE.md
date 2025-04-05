@@ -24,8 +24,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - Component-specific styles in `<style>` tags when needed
   - Global styles in src/styles/
 - **Tailwind**:
-  - Use arbitrary values with square brackets for precise sizing: `w-[680px]`
-  - Follow responsive design patterns with orientation variants: `landscape:w-[680px] portrait:w-[220px]`
+  - Use arbitrary values with square brackets for precise sizing: `w-[700px]`
+  - Follow responsive design patterns with orientation variants: `landscape:w-[700px] portrait:w-[300px]`
   - Custom Tailwind config in tailwind.config.js defines orientation variants
 - **Naming**: PascalCase for component files (e.g., Layout.astro, Home.astro)
 - **HTML**: Use semantic HTML elements; maintain accessibility

@@ -1,66 +1,34 @@
-<div class="
-    landscape:max-w-[680px]
-    landscape:max-h-[220px]
-    landscape:w-[calc(100vw-20px)]
-    landscape:h-[calc(100vh-20px)]
-    portrait:max-h-[680px]
-    portrait:max-w-[220px]
-    portrait:h-[calc(100vh-20px)]
-    portrait:w-[calc(100vw-20px)]
-    bg-white/80
-    rounded-[20px]
-    gradient-border
-    p-[0.5px]
-">
-    <div class="content-container p-2">
-        <!-- <h1 class="text-2xl font-bold mb-2">BrainRoad Labs</h1>
+<div class="br_container">
+    <div class="overflow-auto h-full p-5">
+        <div class="flex items-center justify-between mb-2">
+            <h1 class="text-xl">BrainRoad Labs</h1>
+            <div class="br_badge">
+                <div class="br_badge_green"></div>
+                #OpenToWork
+            </div>
+        </div>
         <p>
-            Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile. Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile. Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile. Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile. Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile. Bonjour je m'appelle Tomy Spagnoletti et j'aime les pizza et les burgers et les lasagnes mais vraiment par dessus tout les pizzas et donc je peux aussi dire que je suis un vrai italien en plus je vis à palerme en sicile.
-        </p> -->
+            BrainRoad Labs builds modern, reliable, scalable web & mobile applications.<br />
+            We <strong>blend</strong> AI, blockchain, classic and proven tech stacks into seamless, high-performance systems.
+            <br /><br />
+            Our code runs for brands like Jean Paul Gaultier, was featured in the <a href="https://www.ces.tech/articles/2023/february/ces-2023-spotlights-tech-for-good/" target="_blank">CES 2023 “Tech for Good” Spotlight</a>, and drives tools that have run for 10+ years without downtime.
+            <br /><br />
+            BrainRoad Labs is where <strong>experimentation</strong> meets <strong>engineering</strong>.
+        </p>
     </div>
 </div>
 
 <style>
-    .gradient-border {
-        position: relative;
-    }
     
-    .gradient-border::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: var(--border-radius);
-        padding: 0.5px;
-        background: linear-gradient(
-            45deg, 
-            rgba(var(--color1), 1) 0%, 
-            rgba(var(--color2), 1) 25%, 
-            rgba(var(--color3), 1) 50%, 
-            rgba(var(--color4), 1) 75%, 
-            rgba(var(--color5), 1) 100%
-        );
-        background-size: 200% 200%;
-        animation: gradientBorder 8s ease infinite;
-        -webkit-mask: 
-            linear-gradient(#fff 0 0) content-box, 
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-        z-index: 1;
-    }
+
+    /*
+
+        TODO: Responsive label
+        TODO: Bliking animation in the label
+        TODO: Le label toujours en haut à gauche
+
+        TODO: Splashscreen with logo
     
-    @keyframes gradientBorder {
-        0% { background-position: 0% 50% }
-        50% { background-position: 100% 50% }
-        100% { background-position: 0% 50% }
-    }
-    
-    .content-container {
-        overflow: auto;
-        height: 100%;
-        position: relative;
-        z-index: 0;
-        border-radius: inherit;
-    }
+    */
+
 </style>
