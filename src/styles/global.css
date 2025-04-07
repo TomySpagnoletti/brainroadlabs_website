@@ -45,6 +45,23 @@ a {
 /* Badge dot color variants */
 .br_badge_green {
   @apply mr-1 h-1.5 w-1.5 rounded-full bg-green-500;
+  animation: blink 2s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes blink {
+  0% { 
+    opacity: 1; 
+    box-shadow: 0 0 4px 1px rgba(34, 197, 94, 0.7); 
+  }
+  50% { 
+    opacity: 0.1; 
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); 
+  }
+  100% { 
+    opacity: 1; 
+    box-shadow: 0 0 4px 1px rgba(34, 197, 94, 0.7); 
+  }
 }
 
 /* Dynamic bubble background */
