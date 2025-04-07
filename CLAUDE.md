@@ -44,3 +44,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Responsive Design**: Adapt layouts based on screen orientation using Tailwind's orientation variants
 - Clean, minimal design
 - Rounded corners (20px radius)
+
+## IMPORTANT RULES
+- Do not ask to start the server
+- Code must always be in English
+- Only do exactly what is requested
+- Do not replace removed code with comments, simply delete it
