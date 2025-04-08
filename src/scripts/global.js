@@ -71,9 +71,26 @@ function initResponsiveHeaders() {
   adjustLayout();
 }
 
+// Function to handle the splash screen
+function initSplashScreen() {
+  const splash = document.getElementById('br_splash');
+  if (!splash) return;
+  
+  // Hide splash screen after 1.5 seconds
+  setTimeout(() => {
+    splash.classList.add('br_splash--hidden');
+    
+    // Remove from DOM after transition completes
+    setTimeout(() => {
+      splash.remove();
+    }, 600); // Same as transition duration
+  }, 1500);
+}
+
 // Initialize all animations when document is ready
 // Add additional initializations below as needed
 document.addEventListener('DOMContentLoaded', () => {
   initInteractiveBubble();
   initResponsiveHeaders();
+  initSplashScreen();
 });
