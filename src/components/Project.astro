@@ -1,0 +1,61 @@
+---
+// Array of projects
+const projects = [
+  {
+    order: 2,
+    title: "Jean Paul Gaultier",
+    status: "Client Hold",
+    badgeClass: "br_badge_orange",
+    description: "BrainRoad Labs builds modern, reliable, scalable web & mobile applications.<br />We <strong>blend</strong> AI, blockchain, classic and proven tech stacks into seamless, high-performance systems.<br /><br />Our code runs for brands like Jean Paul Gaultier, was featured in the <a href=\"https://www.ces.tech/articles/2023/february/ces-2023-spotlights-tech-for-good/\" target=\"_blank\">CES 2023 \"Tech for Good\" Spotlight</a>, and drives tools that have run for 10+ years without downtime.<br /><br />BrainRoad Labs is where <strong>experimentation</strong> meets <strong>engineering</strong>."
+  },
+  {
+    order: 3,
+    title: "CES 2023 Health App",
+    status: "Completed",
+    badgeClass: "br_badge_green",
+    description: "Healthcare monitoring application featured in CES 2023 'Tech for Good' spotlight. Provides accessible healthcare solutions for underserved communities. Built with Flutter, Firebase and AI-powered diagnostics."
+  },
+  {
+    order: 4,
+    title: "Enterprise Monitoring 1",
+    status: "Active",
+    badgeClass: "br_badge_green",
+    description: "Mission-critical monitoring system with 10+ years of continuous uptime. Provides real-time analytics and alerts for enterprise infrastructure. Built with Go, Kubernetes, and high-availability design principles."
+  },
+  {
+    order: 5,
+    title: "Enterprise Monitoring 2",
+    status: "Active",
+    badgeClass: "br_badge_green",
+    description: "Mission-critical monitoring system with 10+ years of continuous uptime. Provides real-time analytics and alerts for enterprise infrastructure. Built with Go, Kubernetes, and high-availability design principles."
+  },
+  {
+    order: 6,
+    title: "Enterprise Monitoring 3",
+    status: "Active",
+    badgeClass: "br_badge_green",
+    description: "Mission-critical monitoring system with 10+ years of continuous uptime. Provides real-time analytics and alerts for enterprise infrastructure. Built with Go, Kubernetes, and high-availability design principles."
+  }
+];
+---
+
+{projects.map(project => (
+  <div class="br_container" style={`--order: ${project.order};`}>
+    <div class="overflow-auto h-full p-5">
+      <div class="br_js_header-container flex flex-wrap items-center mb-2">
+        <h1 class="br_js_title text-xl">Project: {project.title}</h1>
+        <div class="br_js_badge br_badge ml-auto">
+          <div class={project.badgeClass}></div>
+          {project.status}
+        </div>
+      </div>
+      <p set:html={project.description}></p>
+    </div>
+  </div>
+))}
+
+<!--
+
+  TODO: Il me faut une date
+
+-->

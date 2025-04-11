@@ -19,7 +19,6 @@ import '../styles/global.css'
 		<div id="br_splash" class="br_splash">
 			<div class="br_splash_content">BR</div>
 		</div>
-		
 		<div class="gradient-bg">
 			<svg xmlns="http://www.w3.org/2000/svg">
 				<defs>
@@ -39,10 +38,133 @@ import '../styles/global.css'
 				<div class="interactive"></div>
 			</div>
 		</div>
-		<div class="content-wrapper flex justify-center items-center min-h-screen p-[10px]">
+		<div class="content-wrapper min-h-screen p-[10px]">
 			<slot />
 		</div>
-		<script src="../scripts/global.js"></script>
+		<script src="../scripts/index.js"></script>
+		
+		<!-- TODO: remove -->
+		<div class="fixed bottom-5 right-5 flex gap-2 z-[9999]">
+			<button id="decrementOrder" class="bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="m18 15-6-6-6 6"/>
+				</svg>
+			</button>
+			<button id="incrementOrder" class="bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="m6 9 6 6 6-6"/>
+				</svg>
+			</button>
+		</div>
+		
+		<script is:inline>
+			// TODO: remove
+			window.addEventListener('load', () => {
+				console.log("Adding button handlers...");
+				
+				const decrementBtn = document.getElementById('decrementOrder');
+				const incrementBtn = document.getElementById('incrementOrder');
+				
+				if (!decrementBtn || !incrementBtn) {
+					console.error("Buttons not found!");
+					return;
+				}
+				
+				console.log("Buttons found, adding click handlers");
+				
+				decrementBtn.onclick = function() {
+					console.log("Decrement clicked");
+					const containers = document.querySelectorAll('.br_container');
+					containers.forEach(container => {
+						// Get current order (as string or number)
+						let order = container.style.getPropertyValue('--order');
+						
+						// If empty, try to get from data-order attribute
+						if (!order) {
+							order = container.getAttribute('data-order') || '0';
+						}
+						
+						// Convert to number
+						let currentOrder = parseInt(order);
+						
+						// Skip zero when decrementing
+						let newOrder;
+						if (currentOrder === 1) {
+							newOrder = -1; // Skip zero when going from 1 to negative
+						} else {
+							newOrder = currentOrder - 1;
+						}
+						
+						// Update order value
+						container.style.setProperty('--order', newOrder);
+						
+						// Update classes based on order sign
+						if (currentOrder > 0 && newOrder < 0) {
+							// Going from positive to negative: add above class, remove default
+							container.classList.remove('br_container--default-state');
+							container.classList.add('br_container--above');
+							console.log(`Changed class: default -> above (${currentOrder} -> ${newOrder})`);
+						} else if (currentOrder < 0 && newOrder > 0) {
+							// Going from negative to positive: add default class, remove above
+							container.classList.add('br_container--default-state');
+							container.classList.remove('br_container--above');
+							console.log(`Changed class: above -> default (${currentOrder} -> ${newOrder})`);
+						}
+						
+						console.log(`Changed order: ${currentOrder} -> ${newOrder}`);
+					});
+				};
+				
+				incrementBtn.onclick = function() {
+					console.log("Increment clicked");
+					const containers = document.querySelectorAll('.br_container');
+					containers.forEach(container => {
+						// Get current order (as string or number)
+						let order = container.style.getPropertyValue('--order');
+						
+						// If empty, try to get from data-order attribute
+						if (!order) {
+							order = container.getAttribute('data-order') || '0';
+						}
+						
+						// Convert to number
+						let currentOrder = parseInt(order);
+						
+						// Skip zero when incrementing
+						let newOrder;
+						if (currentOrder === -1) {
+							newOrder = 1; // Skip zero when going from negative to positive
+						} else {
+							newOrder = currentOrder + 1;
+						}
+						
+						// Update order value
+						container.style.setProperty('--order', newOrder);
+						
+						// Update classes based on order sign
+						if (currentOrder > 0 && newOrder < 0) {
+							// Going from positive to negative: add above class, remove default
+							container.classList.remove('br_container--default-state');
+							container.classList.add('br_container--above');
+							console.log(`Changed class: default -> above (${currentOrder} -> ${newOrder})`);
+						} else if (currentOrder < 0 && newOrder > 0) {
+							// Going from negative to positive: add default class, remove above
+							container.classList.add('br_container--default-state');
+							container.classList.remove('br_container--above');
+							console.log(`Changed class: above -> default (${currentOrder} -> ${newOrder})`);
+						}
+						
+						console.log(`Changed order: ${currentOrder} -> ${newOrder}`);
+					});
+				};
+				
+				// Make it very clear buttons are active
+				decrementBtn.style.cursor = 'pointer';
+				incrementBtn.style.cursor = 'pointer';
+				
+				console.log("Button handlers added");
+			});
+		</script>
 	</body>
 </html>
 <!--

@@ -73,11 +73,28 @@ a {
 /* Badge dot color variants */
 .br_badge_green {
   @apply mr-1 h-1.5 w-1.5 rounded-full bg-green-500;
-  animation: blink 2s ease-in-out infinite;
+  animation: blink-green 2s ease-in-out infinite;
   position: relative;
 }
 
-@keyframes blink {
+.br_badge_orange {
+  @apply mr-1 h-1.5 w-1.5 rounded-full bg-orange-500;
+  animation: blink-orange 2s ease-in-out infinite;
+  position: relative;
+}
+
+.br_badge_blue {
+  @apply mr-1 h-1.5 w-1.5 rounded-full bg-blue-500;
+  animation: blink-blue 2s ease-in-out infinite;
+  position: relative;
+}
+
+.br_badge_black {
+  @apply mr-1 h-1.5 w-1.5 rounded-full bg-black;
+  position: relative;
+}
+
+@keyframes blink-green {
   0% { 
     opacity: 1; 
     box-shadow: 0 0 4px 1px rgba(34, 197, 94, 0.7); 
@@ -92,8 +109,43 @@ a {
   }
 }
 
+@keyframes blink-orange {
+  0% { 
+    opacity: 1; 
+    box-shadow: 0 0 4px 1px rgba(249, 115, 22, 0.7); 
+  }
+  50% { 
+    opacity: 0.1; 
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); 
+  }
+  100% { 
+    opacity: 1; 
+    box-shadow: 0 0 4px 1px rgba(249, 115, 22, 0.7); 
+  }
+}
+
+@keyframes blink-blue {
+  0% { 
+    opacity: 1; 
+    box-shadow: 0 0 4px 1px rgba(59, 130, 246, 0.7); 
+  }
+  50% { 
+    opacity: 0.1; 
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); 
+  }
+  100% { 
+    opacity: 1; 
+    box-shadow: 0 0 4px 1px rgba(59, 130, 246, 0.7); 
+  }
+}
+
 /* Dynamic bubble background */
 :root {
+  --viewport-height: 0;
+
+  /* ⚠️ Max block count ⚠️ */
+  --max-blocks: 8;
+
   /* Gradient Colors */
   --circle-color1: 180, 240, 220;              /* Light mint/aqua */
   --circle-color2: 120, 220, 200;              /* Darker mint green */
@@ -125,15 +177,38 @@ a {
 }
 
 .content-wrapper {
+  perspective: 1000px;
   position: relative;
   z-index: 10;
+  
+  /* Set up CSS Grid for stacking components */
+  display: grid;
+  grid-template-areas: "stack";
+  
+  /* Center content both horizontally and vertically */
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  
+  /* Add overflow to allow content to move outside */
+  overflow: hidden;
 }
 
 /* Main container for BrainRoad Labs components */
 .br_container {
+  z-index: calc(var(--max-blocks) + 1 - var(--order));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
   /* Base styles for all orientations */
-  @apply bg-white rounded-[var(--border-radius)] border border-[rgba(var(--gray-border))];
+  @apply bg-white rounded-[var(--border-radius)];
   
+  /* Grid positioning to create stack */
+  grid-area: stack;
+  
+  /* Transitions & animations */
+  transition: transform 1.2s ease, opacity 1.2s ease;
+
   /* Landscape orientation */
   @media (orientation: landscape) {
     max-width: var(--container-landscape);
@@ -149,6 +224,26 @@ a {
     width: calc(100vw - var(--body-total-padding));
     height: calc(100vh - var(--body-total-padding));
   }
+}
+
+.br_container--default-state {
+  --opacity-factor: 0.05;
+  --translate-z-factor: 100;
+  opacity: calc(1 + var(--opacity-factor) - (var(--order) * var(--opacity-factor)));
+  transform: translateZ(calc((var(--translate-z-factor) - (var(--order) * var(--translate-z-factor))) * 1px));
+  transform-style: preserve-3d;
+}
+
+.br_container--above {
+  --scale-base: 0.92;
+  --scale-factor: 0.02;
+  --translate-y-padding: -5;
+  --translate-y-factor: -10;
+  transform:
+      translateY(calc(((var(--viewport-height) / 2 + var(--translate-y-padding)) + (var(--order) * var(--translate-y-factor))) * -1px))
+      rotateX(57deg)
+      scale(calc(var(--scale-base) - (var(--order) * var(--scale-factor))));
+  opacity: 0.85;
 }
 
 .gradient-bg {
