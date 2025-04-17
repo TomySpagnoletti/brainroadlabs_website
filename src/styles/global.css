@@ -72,25 +72,25 @@ a {
 
 /* Badge dot color variants */
 .br_badge_green {
-  @apply mr-1 h-1.5 w-1.5 rounded-full bg-green-500;
+  @apply mr-1.5 h-1.5 w-1.5 rounded-full bg-green-500;
   animation: blink-green 2s ease-in-out infinite;
   position: relative;
 }
 
 .br_badge_orange {
-  @apply mr-1 h-1.5 w-1.5 rounded-full bg-orange-500;
+  @apply mr-1.5 h-1.5 w-1.5 rounded-full bg-orange-500;
   animation: blink-orange 2s ease-in-out infinite;
   position: relative;
 }
 
 .br_badge_blue {
-  @apply mr-1 h-1.5 w-1.5 rounded-full bg-blue-500;
+  @apply mr-1.5 h-1.5 w-1.5 rounded-full bg-blue-500;
   animation: blink-blue 2s ease-in-out infinite;
   position: relative;
 }
 
 .br_badge_black {
-  @apply mr-1 h-1.5 w-1.5 rounded-full bg-black;
+  @apply mr-1.5 h-1.5 w-1.5 rounded-full bg-black;
   position: relative;
 }
 
@@ -143,8 +143,8 @@ a {
 :root {
   --viewport-height: 0;
 
-  /* ⚠️ Max block count ⚠️ */
-  --max-blocks: 8;
+  /* Max block count (secured by JS) */
+  --max-blocks: 9;
 
   /* Gradient Colors */
   --circle-color1: 180, 240, 220;              /* Light mint/aqua */

@@ -4,12 +4,30 @@
 
 /*
 
-  TODO: Créer la classe de l'état inactif d'un bloc (pas devant)
-  TODO: Appliquer cet état à tous les blocs qui ne sont pas actifs (qui ne sont pas devant)
-  TODO: Créer la transition du bloc inactif (pas devant) vers le devant de la page
-  TODO: Enlever l'état inactif du bloc qui est actif (devant) : état stable, naturel
-  TODO: Créer la transition du bloc actif (devant) vers le haut de page
-  TODO: Faire le JS pour coordonner tout ça, touch et wheel
+  TODO: gérer le css pour le bloc en mode vertical (transition)
+  
+  TODO: hover sur le menu
+  TODO: highlight le menu en fonction du bloc actif
+
+  TODO: Faire le JS pour coordonner tout ça, touch et wheel (au lieu des flêches), dans le nouveau fichier scrollTransitionV2
+
+  TODO: Logo + Finir Splashscreen
+
+  TODO: Nettoyer Layout.astro
+  TODO: Meta SEO Layout.astro
+  TODO: Favicon.svg (mon logo ! :-) )
+
+  TODO: Revoir toutes mes TODOs
+
+  TODO: Repasser dans tous les dossiers pour contrôle
+
+  TODO: Noter dans mes TODOs de tester sur plusieurs navigateurs
+  TODO: Et sur mobile
+  TODO: Le menu augmente d’opacité à 1 quand on le hover
+  TODO: Cards se réduisent en haut pas s’agrandissent (erreur scale)
+  TODO: Repo BrainRoad Public
+
+  TODO: Faire ou remplir Projet Things pour tâches à venir : Social network, etc...
 
 */
 
