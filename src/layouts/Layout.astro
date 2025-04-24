@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import { Icon } from 'astro-icon/components'
 ---
 
 <!doctype html>
@@ -38,57 +39,81 @@ import '../styles/global.css'
 				<div class="interactive"></div>
 			</div>
 		</div>
-		<div class="content-wrapper min-h-screen p-[10px]">
+		
+		<!-- Main Content Container - using full viewport height -->
+		<div class="content-wrapper min-h-screen p-[10px] relative">
+			
 			<slot />
+			
+			<!-- Floating Navigation Menu -->
+			<div class="floating-nav">
+				<nav class="text-[14px] text-black br-minimal-nav">
+					<div class="flex items-center">
+						<a href="#" id="nav-home">
+							<Icon name="heroicons:home" class="h-5 w-5" />
+						</a>
+						<div class="mx-2 border-t w-8 menu-divider"></div>
+						<a href="#" id="nav-projects">
+							<Icon name="heroicons:folder-open" class="h-5 w-5" />
+						</a>
+						<div class="mx-2 border-t w-8 menu-divider"></div>
+						<a href="#" id="nav-contact">
+							<Icon name="heroicons:envelope" class="h-5 w-5" />
+						</a>
+						<div class="mx-2 border-t w-8 menu-divider"></div>
+						<a href="#" id="nav-explanation">
+							<Icon name="heroicons:information-circle" class="h-5 w-5" />
+						</a>
+					</div>
+				</nav>
+			</div>
 		</div>
+		
 		<script src="../scripts/index.js"></script>
-		
-		<!-- TODO: remove - Navigation Menu -->
-		<div class="fixed bottom-20 left-0 right-0 flex justify-center items-center gap-4 z-[9999]">
-			<nav class="bg-white rounded-full shadow-md p-2 px-4">
-				<ul class="flex gap-5">
-					<li><a href="#" id="nav-home" class="hover:text-blue-600 font-medium">Home</a></li>
-					<li><a href="#" id="nav-projects" class="hover:text-blue-600 font-medium">Projects</a></li>
-					<li><a href="#" id="nav-contact" class="hover:text-blue-600 font-medium">Contact</a></li>
-					<li><a href="#" id="nav-explanation" class="hover:text-blue-600 font-medium">Explanation</a></li>
-				</ul>
-			</nav>
-		</div>
-		
-		<!-- TODO: remove - Controls -->
-		<div class="fixed bottom-5 right-5 flex gap-2 z-[9999]">
-			<button id="decrementOrder" class="bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="m18 15-6-6-6 6"/>
-				</svg>
-			</button>
-			<button id="incrementOrder" class="bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="m6 9 6 6 6-6"/>
-				</svg>
-			</button>
-		</div>
 		
 		<script is:inline>
 			// TODO: remove
+
 			window.addEventListener('load', () => {
-				console.log("Adding button handlers...");
+				// Navigation menu handlers
+				const navHome = document.getElementById('nav-home');
+				const navProjects = document.getElementById('nav-projects');
+				const navContact = document.getElementById('nav-contact');
+				const navExplanation = document.getElementById('nav-explanation');
 				
-				const decrementBtn = document.getElementById('decrementOrder');
-				const incrementBtn = document.getElementById('incrementOrder');
-				
-				if (!decrementBtn || !incrementBtn) {
-					console.error("Buttons not found!");
-					return;
+				// Function to update active navigation state
+				function updateActiveNavItem() {
+					// Remove active class from all nav items
+					document.querySelectorAll('.br-minimal-nav a').forEach(item => {
+						item.classList.remove('active');
+					});
+					
+					// Find the container with order = 1 (the currently visible one)
+					const containers = document.querySelectorAll('.br_container');
+					let activeContainer = null;
+					
+					containers.forEach(container => {
+						const orderValue = parseInt(container.style.getPropertyValue('--order') || '0');
+						if (orderValue === 1) {
+							activeContainer = container;
+						}
+					});
+					
+					// If found, activate the corresponding nav item
+					if (activeContainer) {
+						const navId = activeContainer.getAttribute('data-nav-id');
+						if (navId) {
+							const navItem = document.getElementById(navId);
+							if (navItem) {
+								navItem.classList.add('active');
+							}
+						}
+					}
 				}
 				
-				console.log("Buttons found, adding click handlers");
-				
-				decrementBtn.onclick = function() {
-					console.log("Decrement clicked");
+				// Function to decrement all containers
+				function decrementAllContainers() {
 					const containers = document.querySelectorAll('.br_container');
-					
-					// Get max blocks count (limiting factor for order values)
 					const maxBlocks = containers.length;
 					
 					// Define minimum limit (one less than max blocks)
@@ -145,16 +170,15 @@ import '../styles/global.css'
 							container.classList.remove('br_container--above');
 							console.log(`Changed class: above -> default (${currentOrder} -> ${newOrder})`);
 						}
-						
-						console.log(`Changed order: ${currentOrder} -> ${newOrder}`);
 					});
-				};
-				
-				incrementBtn.onclick = function() {
-					console.log("Increment clicked");
-					const containers = document.querySelectorAll('.br_container');
 					
-					// Get max blocks count (limiting factor for order values)
+					// Update active menu item after decrement
+					setTimeout(updateActiveNavItem, 100);
+				}
+				
+				// Function to increment all containers
+				function incrementAllContainers() {
+					const containers = document.querySelectorAll('.br_container');
 					const maxBlocks = containers.length;
 					
 					// Check if any container is already at the maximum limit
@@ -208,22 +232,11 @@ import '../styles/global.css'
 							container.classList.remove('br_container--above');
 							console.log(`Changed class: above -> default (${currentOrder} -> ${newOrder})`);
 						}
-						
-						console.log(`Changed order: ${currentOrder} -> ${newOrder}`);
 					});
-				};
-				
-				// Make it very clear buttons are active
-				decrementBtn.style.cursor = 'pointer';
-				incrementBtn.style.cursor = 'pointer';
-				
-				console.log("Button handlers added");
-				
-				// Navigation menu handlers
-				const navHome = document.getElementById('nav-home');
-				const navProjects = document.getElementById('nav-projects');
-				const navContact = document.getElementById('nav-contact');
-				const navExplanation = document.getElementById('nav-explanation');
+					
+					// Update active menu item after increment
+					setTimeout(updateActiveNavItem, 100);
+				}
 				
 				// Navigate to specific views using the increment/decrement logic
 				function navigateToView(targetBaseOrder) {
@@ -264,106 +277,27 @@ import '../styles/global.css'
 							incrementAllContainers();
 						}
 					}
+					
+					// Update active menu item after transition
+					setTimeout(updateActiveNavItem, 100);
 				}
 				
-				// Increment all containers (reusing existing logic)
-				function incrementAllContainers() {
-					const containers = document.querySelectorAll('.br_container');
-					const maxBlocks = containers.length;
-					
-					// Check if any container is already at the maximum limit
-					let atMaximumLimit = false;
-					containers.forEach(container => {
-						const orderValue = container.style.getPropertyValue('--order');
-						if (orderValue && parseInt(orderValue) === maxBlocks) {
-							atMaximumLimit = true;
-						}
-					});
-					
-					// If at limit, show message and stop
-					if (atMaximumLimit) {
-						console.log(`Cannot increment: A container is already at maximum value (${maxBlocks})`);
-						return;
+				// Add keyboard event listener for arrow keys
+				document.addEventListener('keydown', (e) => {
+					// Handle arrow up/down keys
+					if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+						e.preventDefault();
+						console.log("Arrow up/left pressed - decrementing order");
+						decrementAllContainers();
+					} else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+						e.preventDefault();
+						console.log("Arrow down/right pressed - incrementing order");
+						incrementAllContainers();
 					}
-					
-					// Process all containers
-					containers.forEach(container => {
-						let order = container.style.getPropertyValue('--order');
-						if (!order) {
-							order = container.getAttribute('data-order') || '1';
-						}
-						
-						let currentOrder = parseInt(order);
-						
-						// Skip zero when incrementing
-						let newOrder;
-						if (currentOrder === -1) {
-							newOrder = 1; // Skip zero
-						} else {
-							newOrder = currentOrder + 1;
-						}
-						
-						// Update order and classes
-						container.style.setProperty('--order', newOrder);
-						
-						// Update classes based on sign change
-						if (currentOrder < 0 && newOrder > 0) {
-							container.classList.add('br_container--default-state');
-							container.classList.remove('br_container--above');
-						}
-					});
-				}
+				});
 				
-				// Decrement all containers (reusing existing logic)
-				function decrementAllContainers() {
-					const containers = document.querySelectorAll('.br_container');
-					const maxBlocks = containers.length;
-					
-					// Define minimum limit (one less than max blocks)
-					const minLimit = -(maxBlocks - 1);
-					
-					// Check if any container is already at the minimum limit
-					let atMinimumLimit = false;
-					containers.forEach(container => {
-						const orderValue = container.style.getPropertyValue('--order');
-						if (orderValue && parseInt(orderValue) === minLimit) {
-							atMinimumLimit = true;
-						}
-					});
-					
-					// If at limit, show message and stop
-					if (atMinimumLimit) {
-						console.log(`Cannot decrement: A container is already at minimum value (${minLimit})`);
-						return;
-					}
-					
-					// Process all containers
-					containers.forEach(container => {
-						let order = container.style.getPropertyValue('--order');
-						if (!order) {
-							order = container.getAttribute('data-order') || '1';
-						}
-						
-						let currentOrder = parseInt(order);
-						
-						// Skip zero when decrementing
-						let newOrder;
-						if (currentOrder === 1) {
-							newOrder = -1; // Skip zero
-						} else {
-							newOrder = currentOrder - 1;
-						}
-						
-						// Update order and classes
-						container.style.setProperty('--order', newOrder);
-						
-						// Update classes based on sign change
-						if (currentOrder > 0 && newOrder < 0) {
-							container.classList.remove('br_container--default-state');
-							container.classList.add('br_container--above');
-						}
-					});
-				}
+				// Initial check for active menu item
+				updateActiveNavItem();
 				
 				// Add click handlers to navigation items
 				navHome.addEventListener('click', (e) => {

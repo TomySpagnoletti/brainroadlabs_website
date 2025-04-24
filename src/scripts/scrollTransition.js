@@ -4,17 +4,21 @@
 
 /*
 
-  TODO: gérer le css pour le bloc en mode vertical (transition)
   
-  TODO: hover sur le menu
-  TODO: highlight le menu en fonction du bloc actif
+
+  
+  
+
+  
+
+  TODO: commit
 
   TODO: Faire le JS pour coordonner tout ça, touch et wheel (au lieu des flêches), dans le nouveau fichier scrollTransitionV2
+  TODO: Nettoyer Layout.astro
 
   TODO: Logo + Finir Splashscreen
 
-  TODO: Nettoyer Layout.astro
-  TODO: Meta SEO Layout.astro
+  TODO: Meta SEO Layout.astro (après remplissage)
   TODO: Favicon.svg (mon logo ! :-) )
 
   TODO: Revoir toutes mes TODOs
@@ -22,14 +26,14 @@
   TODO: Repasser dans tous les dossiers pour contrôle
 
   TODO: Noter dans mes TODOs de tester sur plusieurs navigateurs
-  TODO: Et sur mobile
-  TODO: Le menu augmente d’opacité à 1 quand on le hover
-  TODO: Cards se réduisent en haut pas s’agrandissent (erreur scale)
-  TODO: Repo BrainRoad Public
+  TODO: Et sur mobile (ngrok)
 
   TODO: Faire ou remplir Projet Things pour tâches à venir : Social network, etc...
 
 */
+
+
+
 
 export function initScrollTransition() {
   const containers = document.querySelectorAll('.br_container');

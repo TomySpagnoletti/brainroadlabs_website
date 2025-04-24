@@ -39,7 +39,7 @@ const projects = [
 ---
 
 {projects.map(project => (
-  <div class="br_container" style={`--order: ${project.order};`}>
+  <div class="br_container" data-nav-id="nav-projects" style={`--order: ${project.order};`}>
     <div class="overflow-auto h-full p-5">
       <div class="br_js_header-container flex flex-wrap items-center mb-2">
         <h1 class="br_js_title text-xl">Project: {project.title}</h1>

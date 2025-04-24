@@ -144,7 +144,7 @@ a {
   --viewport-height: 0;
 
   /* Max block count (secured by JS) */
-  --max-blocks: 9;
+  --max-blocks: 10;
 
   /* Gradient Colors */
   --circle-color1: 180, 240, 220;              /* Light mint/aqua */
@@ -174,6 +174,9 @@ a {
 
   /* Border */
   --gray-border: 80, 80, 95, 0.15;
+  
+  /* Menu Colors */
+  --menu-color: 80, 80, 95;
 }
 
 .content-wrapper {
@@ -190,6 +193,9 @@ a {
   align-items: center;
   align-content: center;
   justify-items: center;
+  
+  /* Preserve 3D space for children */
+  transform-style: preserve-3d;
   
   /* Add overflow to allow content to move outside */
   overflow: hidden;
@@ -229,21 +235,30 @@ a {
 .br_container--default-state {
   --opacity-factor: 0.05;
   --translate-z-factor: 100;
+  
   opacity: calc(1 + var(--opacity-factor) - (var(--order) * var(--opacity-factor)));
   transform: translateZ(calc((var(--translate-z-factor) - (var(--order) * var(--translate-z-factor))) * 1px));
-  transform-style: preserve-3d;
 }
 
 .br_container--above {
-  --scale-base: 0.92;
-  --scale-factor: 0.02;
-  --translate-y-padding: -5;
+  --scale-base: 0.95;
+  --scale-factor: -0.01;
   --translate-y-factor: -10;
+  
+  /* Normal desktop (landscape) */
+  --translate-y-padding: -7;
+  
+  /* Small height or portrait mode */
+  @media (orientation: portrait), (max-height: 400px) {
+    --translate-y-padding: 57;
+  }
+  
+  opacity: 0.85;
+
   transform:
       translateY(calc(((var(--viewport-height) / 2 + var(--translate-y-padding)) + (var(--order) * var(--translate-y-factor))) * -1px))
       rotateX(57deg)
       scale(calc(var(--scale-base) - (var(--order) * var(--scale-factor))));
-  opacity: 0.85;
 }
 
 .gradient-bg {
@@ -383,5 +398,82 @@ a {
   }
   100% {
     transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+/* Minimal Navigation Menu Styles */
+.br-minimal-nav {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  color: rgba(var(--menu-color), 0.5);
+}
+
+.br-minimal-nav a {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  color: rgba(var(--menu-color), 0.70);
+  font-style: italic;
+  display: inline-block;
+}
+
+.br-minimal-nav a:hover, .br-minimal-nav a.active {
+  color: rgba(var(--menu-color), 1);
+  transform: scale(1.20);
+}
+
+/* Force remove hover states on touch screens */
+@media (hover: none) {
+  .br-minimal-nav a:hover:not(.active) {
+    color: rgba(var(--menu-color), 0.70);
+    transform: scale(1);
+  }
+}
+
+/* Ensure clear active state for touch devices */
+.br-minimal-nav a.active {
+  color: rgb(160, 100, 245) !important; /* Custom purple for active state */
+  transform: scale(1.20) !important;
+}
+
+.br-minimal-nav .menu-divider {
+  border-color: rgba(var(--menu-color), 0.08);
+}
+
+/* Absolute Positioned Navigation */
+.floating-nav {
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 30px;
+  padding: 8px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Add extra scroll space with pseudo-element */
+.br_container .overflow-auto::after {
+  content: "";
+  display: block;
+  height: 40px; /* Extra scroll space */
+  pointer-events: none; /* Allow clicking through */
+  opacity: 0; /* Make invisible */
+}
+
+/* Safari-specific styles */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  _::-webkit-full-page-media, _:future, :root {
+    .g1, .g2, .g3, .g4, .g5, .interactive {
+      mix-blend-mode: soft-light !important;
+    }
   }
 }

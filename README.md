@@ -1,48 +1,76 @@
-# Astro Starter Kit: Basics
+# BrainRoad Labs Website
 
-```sh
-npm create astro@latest -- --template basics
+## 🚀 Overview
+
+BrainRoad Labs is a professional web and mobile development company providing innovative technical solutions. This repository contains the source code for our official website, featuring a unique interactive experience with custom scroll transitions, responsive design, and engaging animations.
+
+Our site serves as both a portfolio of our work and a demonstration of our technical capabilities through modern web implementation.
+
+## ✨ Features
+
+- **Custom Scroll Experience**: Smooth transitions between content sections
+- **Adaptive Design**: Automatically adapts to portrait and landscape orientations
+- **Interactive Elements**: Dynamic background with responsive animations
+- **Modern Technology Stack**: Built with Astro and Tailwind CSS
+
+## 🛠️ Technology Stack
+
+- **Framework**: Astro v5.6.0
+- **CSS Framework**: Tailwind CSS v4.1.1 
+- **Tailwind Integration**: @tailwindcss/vite v4.1.1
+- **JavaScript**: Vanilla JS with modular architecture
+- **Typography**: Geist and Geist Mono fonts
+- **Node**: v20+ recommended
+
+## 🏗️ Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
-│   └── favicon.svg
+├── public/              # Static assets served as-is
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── assets/          # Project assets (images, etc.)
+│   ├── components/      # Astro components
+│   ├── layouts/         # Layout templates
+│   ├── pages/           # Page definitions
+│   ├── scripts/         # JavaScript modules
+│   └── styles/          # Global styles
 └── package.json
 ```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `npm install`          | Installs dependencies                            |
+| `npm run dev`          | Starts local dev server at `localhost:4321`      |
+| `npm run build`        | Build your production site to `./dist/`          |
+| `npm run preview`      | Preview your build locally, before deploying     |
+| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 
-## 👀 Want to learn more?
+## 🎯 Design Philosophy
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Our website emphasizes:
+- **Memorable Experience**: Creating a strong first impression through innovative navigation
+- **Visual Consistency**: Maintaining a cohesive aesthetic with smooth transitions and elegant design
+- **Performance**: Ensuring fast loading times and smooth animations
+- **Accessibility**: Supporting different devices and screen orientations
+
+## 👥 Target Audience
+
+- **Potential Clients**: Businesses seeking web/mobile development services
+- **Technical Partners**: Technology companies looking for collaborations
+- **Talent**: Professionals interested in work opportunities
+- **Tech Community**: Developers interested in innovative approaches
+
+## 📋 Development Guidelines
+
+- **Styling**: Use Tailwind CSS classes for styling
+- **Components**: Follow Astro component structure
+- **Responsiveness**: Implement orientation-specific layouts with Tailwind variants
+- **JavaScript**: Organize code in modular pattern
+
+## 📄 License
+
+© BrainRoad Labs - All Rights Reserved
