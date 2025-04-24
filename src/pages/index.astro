@@ -1,4 +1,5 @@
 ---
+/* COMPONENTS */
 import Layout from '../layouts/Layout.astro';
 import Home from '../components/Home.astro';
 import Project from '../components/Project.astro';
@@ -6,6 +7,9 @@ import Contact from '../components/Contact.astro';
 import Explanation from '../components/Explanation.astro';
 import Credits from '../components/Credits.astro';
 import Unlcku from '../components/Unlck-u.astro';
+/* VERCEL ADD-ONS */
+import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from "@vercel/speed-insights/astro"
 ---
 
 <Layout>
@@ -16,3 +20,6 @@ import Unlcku from '../components/Unlck-u.astro';
 	<Credits />
 	<Unlcku />
 </Layout>
+
+<Analytics/>
+<SpeedInsights/>

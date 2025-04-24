@@ -4,15 +4,6 @@
 
 /*
 
-  
-
-  
-  
-
-  
-
-  TODO: commit
-
   TODO: Faire le JS pour coordonner tout ça, touch et wheel (au lieu des flêches), dans le nouveau fichier scrollTransitionV2
   TODO: Nettoyer Layout.astro
 
