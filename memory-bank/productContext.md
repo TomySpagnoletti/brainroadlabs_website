@@ -1,38 +1,40 @@
 # BrainRoad Labs Website - Product Context
 
 ## Why This Project Exists
-
-The BrainRoad Labs website serves as a professional showcase for the BrainRoad Labs company, highlighting its skills, projects, and services. It demonstrates the company's technical expertise through an innovative and interactive user experience.
+The BrainRoad Labs website serves as the company's digital presence, designed to:
+- Showcase technical expertise and innovative capabilities.
+- Attract potential clients and partners.
+- Present a portfolio of projects and services.
+- Serve as a point of contact and information for individuals interested in the company, including potential talent (#OpenToWork).
 
 ## Problems It Solves
+- **Establishes Professional Online Presence**: Provides a credible and modern front for BrainRoad Labs.
+- **Demonstrates Technical Prowess**: The website itself, with its custom interactions and animations, acts as a live demo of the company's skills.
+- **Communicates Value Proposition**: Clearly articulates what BrainRoad Labs offers, its experience (e.g., Jean Paul Gaultier, CES 2023 feature), and its approach of blending experimentation with robust engineering.
+- **Facilitates Contact and Engagement**: Offers a way for interested parties to learn more and potentially reach out.
 
-1. **Professional Visibility**: Establishes an online presence for BrainRoad Labs, allowing potential clients to discover the company.
-2. **Technical Demonstration**: Illustrates the company's technical skills through modern and innovative web implementation.
-3. **Value Communication**: Clearly presents BrainRoad Labs' services, expertise, and achievements.
-4. **Information Accessibility**: Organizes information in an intuitive and accessible way for visitors.
-
-## How It Should Work
-
-The site uses a custom scrolling mechanism that creates a unique navigation experience:
-
-1. **Section-based Navigation**: Content is organized into distinct sections (Home, Projects, Contact, Explanation, Credits).
-2. **Smooth Transitions**: Transitions between sections are animated and fluid, creating an immersive experience.
-3. **Adaptability**: The interface automatically adapts to screen orientation (portrait/landscape).
-4. **Interactivity**: Interactive elements like the dynamic bubble background react to mouse movements.
-5. **Splash Screen**: A splash screen welcomes visitors with an entry animation.
+## How It Should Work (Current & Intended)
+The site is structured as a single-page experience with multiple content sections.
+- **Section-Based Navigation**: Content is divided into distinct sections (Home, Projects, Contact, Explanation, Credits, Unlck-u).
+- **Custom Scroll/Transition Experience**:
+    - Users navigate between these sections using a custom mechanism rather than traditional browser scrolling.
+    - The navigation is handled by `src/scripts/navigation.js`, which manipulates CSS `--order` properties to create a 3D stacking/sliding effect.
+    - Navigation is triggered by a floating menu and keyboard arrow keys, with plans to enhance wheel and touch gesture support.
+- **Visual Interactivity**:
+    - An animated gradient background with "metaball" style effects.
+    - An interactive bubble element that follows the mouse cursor.
+- **Responsive Adaptation**: The layout and component dimensions adjust based on screen orientation (landscape/portrait).
+- **Splash Screen**: A brief animated splash screen (`BR`) is shown on initial load.
 
 ## User Experience Goals
-
-1. **Memorable Impression**: Create a strong first impression that demonstrates technical innovation.
-2. **Intuitive Navigation**: Allow users to easily navigate between sections despite the custom scrolling mechanism.
-3. **Visual Consistency**: Maintain a consistent aesthetic with smooth transitions and clean design.
-4. **Accessibility**: Ensure the site remains accessible on different devices and screen orientations.
-5. **Performance**: Guarantee fast loading times and smooth animations.
-6. **Engagement**: Encourage site exploration through visually appealing interactions.
+- **Memorable and Innovative**: Leave a strong impression of technical skill and creativity through unique interactions.
+- **Intuitive Navigation**: Despite the custom scroll, navigation should feel relatively easy and predictable. The floating menu and keyboard controls aid this.
+- **Visually Engaging**: Maintain a clean, modern aesthetic with smooth animations and appealing visual effects (gradients, rounded corners).
+- **Clear Information Hierarchy**: Present information about the company, its services, and projects in an organized manner.
+- **Performant**: Ensure quick load times and fluid animations.
 
 ## Target Personas
-
-1. **Potential Clients**: Businesses or individuals looking for web/mobile development services.
-2. **Technical Partners**: Other technology companies seeking collaborations.
-3. **Recruiters and Talent**: Professionals interested in work opportunities (as indicated by the "#OpenToWork" badge).
-4. **Tech Community**: Developers and tech professionals interested in innovative approaches.
+- **Potential Clients**: Businesses or individuals seeking advanced web/mobile development, AI, or blockchain solutions.
+- **Technical Partners**: Other tech companies or developers looking for collaboration.
+- **Recruiters/Talent**: Professionals interested in working with BrainRoad Labs.
+- **Tech Enthusiasts**: Individuals interested in innovative web design and development.

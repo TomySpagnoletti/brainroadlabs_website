@@ -232,6 +232,11 @@ a {
   }
 }
 
+/* For long texts that overflow */
+.br_container p {
+  word-break: break-word;
+}
+
 .br_container--default-state {
   --opacity-factor: 0.05;
   --translate-z-factor: 100;
@@ -418,8 +423,8 @@ a {
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
   color: rgba(var(--menu-color), 0.70);
-  font-style: italic;
   display: inline-block;
+  font-size: 12px;
 }
 
 .br-minimal-nav a:hover, .br-minimal-nav a.active {

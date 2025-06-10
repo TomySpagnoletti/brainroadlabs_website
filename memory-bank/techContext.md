@@ -3,99 +3,98 @@
 ## Technologies Used
 
 ### Core Framework
-- **Astro v5.6.0**: A modern static site builder that allows for component-based development with minimal JavaScript.
+- **Astro v5.8.0**: Static site builder for component-based development.
 
-### CSS Framework
-- **Tailwind CSS v4.1.1**: Utility-first CSS framework for rapid UI development.
-- **@tailwindcss/vite v4.1.1**: Tailwind CSS integration for Vite.
+### CSS & Styling
+- **Tailwind CSS v4.1.1**: Utility-first CSS framework.
+  - Integrated via `@tailwindcss/vite` v4.1.1.
+  - Configuration in `tailwind.config.js` includes custom `portrait` and `landscape` screen variants.
+- **Custom CSS**: Extensive custom styles in `src/styles/global.css` for:
+  - Base styling, typography (Geist, Geist Mono).
+  - Splash screen, animated badges.
+  - Complex gradient background with SVG filters (`#goo`) and animations.
+  - Core layout mechanics for section containers (`.br_container`) using CSS custom properties (`--order`, `--viewport-height`, etc.) for 3D-like transitions.
+  - Floating navigation menu styling.
 
 ### JavaScript
-- **Vanilla JavaScript**: Used for custom interactions and animations.
-- **ES Modules**: For modular JavaScript organization.
+- **Vanilla JavaScript (ES Modules)**: Used for all client-side interactions.
+  - Main entry point: `src/scripts/index.js`.
+  - Modules for:
+    - DOM initialization (`initDOM.js`): Sets CSS variables like `--viewport-height`, `--max-blocks`, and initial container classes.
+    - Interactive background bubble (`interactiveBubble.js`).
+    - Responsive header adjustments (`responsiveHeaders.js`).
+    - Splash screen handling (`splashScreen.js`).
+    - Scroll transition logic:
+      - `src/scripts/navigation.js`: Manages the core navigation logic by manipulating CSS `--order` properties.
 
-### Fonts
-- **Geist**: Sans-serif font for headings and UI elements.
-- **Geist Mono**: Monospace variant used for body text.
+### UI & UX
+- **Icons**: `astro-icon` v1.1.5 with `@iconify-json/heroicons` v1.2.2.
 
-### Build Tools
-- **Vite**: Fast, modern frontend build tool (integrated with Astro).
-- **Node.js**: JavaScript runtime (v20+ recommended).
-- **npm**: Package manager for dependencies.
+### Analytics & Monitoring
+- **Vercel Analytics**: `@vercel/analytics` v1.5.0.
+- **Vercel Speed Insights**: `@vercel/speed-insights` v1.2.0.
+
+### Build Tools & Environment
+- **Vite**: Frontend build tool (via Astro).
+- **Node.js**: v20+ recommended.
+- **npm**: Package manager.
 
 ## Development Setup
 
 ### Local Development
-- **Development Server**: Run with `npm run dev`
-- **Build Process**: Generate production build with `npm run build`
-- **Preview**: Preview production build with `npm run preview`
+- Server: `npm run dev`
+- Build: `npm run build`
+- Preview: `npm run preview`
 
 ### Project Structure
-- **src/components/**: Astro components for different sections
-- **src/layouts/**: Layout templates
-- **src/pages/**: Page definitions
-- **src/assets/**: Static assets
-- **src/styles/**: Global styles and CSS utilities
-- **src/scripts/**: JavaScript modules for functionality
-- **public/**: Static files served as-is
+- `src/components/`: Astro components for sections (Home, Project, Contact, Explanation, Credits, Unlck-u).
+- `src/layouts/`: Main layout (`Layout.astro`).
+- `src/pages/`: Astro pages (`index.astro`).
+- `src/assets/`: Static assets (e.g., images, not explicitly seen but typical).
+- `public/`: Publicly served static files (e.g., `favicon.svg`).
+- `src/styles/`: Global CSS (`global.css`).
+- `src/scripts/`: Client-side JavaScript modules.
 
-## Technical Constraints
+## Technical Constraints & Considerations
 
 ### Browser Compatibility
-- Designed for modern browsers with CSS Grid and custom properties support.
-- Uses modern JavaScript features (ES6+).
+- Assumed modern browsers due to usage of CSS Grid, custom properties, `visualViewport`, and ES Modules.
+- Safari-specific CSS for `mix-blend-mode` is present.
 
-### Performance Considerations
-- Animations and transitions should remain smooth on various devices.
-- Gradient background effects should not cause performance issues on mobile.
+### Performance
+- Animations (gradient background, section transitions, splash screen) need to be performant.
+- Vercel Speed Insights is integrated for monitoring.
 
 ### Accessibility
-- Custom scroll behavior must not interfere with basic accessibility requirements.
-- Interactive elements need to be keyboard accessible.
+- Custom scroll behavior needs careful consideration for accessibility (keyboard navigation, screen readers).
+- Current inline script in `Layout.astro` includes keyboard (arrow key) navigation.
 
-## Dependencies
+## Dependencies (from `package.json`)
 
-### Direct Dependencies
-```json
-{
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.1",
-    "astro": "^5.6.0",
-    "tailwindcss": "^4.1.1"
-  }
-}
-```
+### Main Dependencies
+- `astro`: ^5.8.0
+- `tailwindcss`: ^4.1.1
+- `@tailwindcss/vite`: ^4.1.1
+- `astro-icon`: ^1.1.5
+- `@vercel/analytics`: ^1.5.0
+- `@vercel/speed-insights`: ^1.2.0
 
-### External Resources
-- Google Fonts for Geist and Geist Mono font families.
+### Dev Dependencies
+- `@iconify-json/heroicons`: ^1.2.2
 
 ## Tool Usage Patterns
 
 ### CSS Methodology
-- Tailwind utility classes for most styling.
-- Custom CSS for specific animations and effects.
-- CSS custom properties (variables) for dynamic values.
+- Primarily Tailwind CSS utility classes.
+- Extensive custom CSS in `src/styles/global.css` for complex layouts, animations, and theming via CSS custom properties.
+- Responsive design heavily relies on `@media (orientation: landscape/portrait)` and custom screen variants in Tailwind.
 
 ### JavaScript Organization
-- Modular JavaScript with separate files for different functionalities:
-  - `index.js`: Main entry point that initializes all features
-  - `scrollTransition.js`: Handles custom scroll behavior
-  - `interactiveBubble.js`: Manages interactive background elements
-  - `responsiveHeaders.js`: Adjusts headers based on viewport
-  - `splashScreen.js`: Controls splash screen animation
-  - `initDOM.js`: Sets up initial DOM state
+- Modular, with an `index.js` initializing various features.
+- DOM manipulation for dynamic styling and behavior (e.g., setting CSS variables, class toggling).
+- Event listeners for user interactions (scroll, touch, mousemove, resize, keydown) and lifecycle events (`DOMContentLoaded`).
+- The scroll/navigation logic is now centralized in `src/scripts/navigation.js`, which is initialized from `index.js`.
 
 ### Build and Deployment
-- Astro handles the build process, generating static HTML with minimal JavaScript.
-- CSS is processed through Tailwind's pipeline.
-
-## Environment Requirements
-
-- **Node.js**: v20+ recommended
-- **npm**: For package management
-- **Modern browser**: For development and testing
-
-## Technical Debt and Considerations
-
-- The `scrollTransitionV2.js` file is currently empty and needs implementation.
-- There are several TODO comments in the codebase that need to be addressed.
-- The navigation menu and controls in Layout.astro are marked with TODO for removal.
+- Astro handles the build process.
+- Vercel tools suggest potential deployment on Vercel.

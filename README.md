@@ -8,33 +8,39 @@ Our site serves as both a portfolio of our work and a demonstration of our techn
 
 ## ✨ Features
 
-- **Custom Scroll Experience**: Smooth transitions between content sections
-- **Adaptive Design**: Automatically adapts to portrait and landscape orientations
-- **Interactive Elements**: Dynamic background with responsive animations
-- **Modern Technology Stack**: Built with Astro and Tailwind CSS
+- **Custom Scroll Experience**: Smooth transitions between content sections using a custom mechanism.
+- **Adaptive Design**: Automatically adapts to portrait and landscape screen orientations.
+- **Interactive Elements**: Dynamic animated gradient background with a cursor-following bubble.
+- **Modern Technology Stack**: Built with Astro, Tailwind CSS, and Vanilla JavaScript.
+- **Component-Based**: Modular design using Astro components.
+- **Splash Screen**: Initial loading animation.
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Astro v5.6.0
-- **CSS Framework**: Tailwind CSS v4.1.1 
-- **Tailwind Integration**: @tailwindcss/vite v4.1.1
+- **Framework**: Astro v5.8.0
+- **CSS Framework**: Tailwind CSS v4.1.1
+- **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
+- **Icon Toolkit**: `astro-icon` (with Heroicons)
 - **JavaScript**: Vanilla JS with modular architecture
 - **Typography**: Geist and Geist Mono fonts
+- **Analytics**: Vercel Analytics & Speed Insights
 - **Node**: v20+ recommended
 
 ## 🏗️ Project Structure
 
 ```
 /
-├── public/              # Static assets served as-is
+├── public/              # Static assets served as-is (e.g., favicon.svg)
 ├── src/
 │   ├── assets/          # Project assets (images, etc.)
-│   ├── components/      # Astro components
-│   ├── layouts/         # Layout templates
-│   ├── pages/           # Page definitions
-│   ├── scripts/         # JavaScript modules
-│   └── styles/          # Global styles
-└── package.json
+│   ├── components/      # Astro components (Home, Project, Contact, etc.)
+│   ├── layouts/         # Layout templates (Layout.astro)
+│   ├── pages/           # Page definitions (index.astro)
+│   ├── scripts/         # JavaScript modules (e.g., navigation.js, interactiveBubble.js)
+│   └── styles/          # Global styles (global.css)
+├── astro.config.mjs     # Astro configuration
+├── tailwind.config.js   # Tailwind CSS configuration
+└── package.json         # Project dependencies and scripts
 ```
 
 ## 🧞 Commands
@@ -52,24 +58,24 @@ All commands are run from the root of the project, from a terminal:
 ## 🎯 Design Philosophy
 
 Our website emphasizes:
-- **Memorable Experience**: Creating a strong first impression through innovative navigation
-- **Visual Consistency**: Maintaining a cohesive aesthetic with smooth transitions and elegant design
-- **Performance**: Ensuring fast loading times and smooth animations
-- **Accessibility**: Supporting different devices and screen orientations
+- **Memorable Experience**: Creating a strong first impression through innovative navigation and visuals.
+- **Visual Consistency**: Maintaining a cohesive aesthetic with smooth transitions and elegant design.
+- **Performance**: Ensuring fast loading times and smooth animations.
+- **Accessibility**: Striving to support different devices and screen orientations effectively.
 
 ## 👥 Target Audience
 
-- **Potential Clients**: Businesses seeking web/mobile development services
-- **Technical Partners**: Technology companies looking for collaborations
-- **Talent**: Professionals interested in work opportunities
-- **Tech Community**: Developers interested in innovative approaches
+- **Potential Clients**: Businesses seeking web/mobile development services.
+- **Technical Partners**: Technology companies looking for collaborations.
+- **Talent**: Professionals interested in work opportunities.
+- **Tech Community**: Developers interested in innovative approaches.
 
 ## 📋 Development Guidelines
 
-- **Styling**: Use Tailwind CSS classes for styling
-- **Components**: Follow Astro component structure
-- **Responsiveness**: Implement orientation-specific layouts with Tailwind variants
-- **JavaScript**: Organize code in modular pattern
+- **Styling**: Primarily use Tailwind CSS classes; supplement with custom CSS in `src/styles/global.css` for complex effects and theming via CSS custom properties.
+- **Components**: Follow Astro component structure for modularity.
+- **Responsiveness**: Implement orientation-specific layouts (landscape/portrait) using Tailwind variants and custom CSS.
+- **JavaScript**: Organize client-side code in modular ES6 modules (like `navigation.js`), initialized from `src/scripts/index.js`.
 
 ## 📄 License
 

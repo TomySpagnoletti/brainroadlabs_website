@@ -41,7 +41,7 @@ import { Icon } from 'astro-icon/components'
 		</div>
 		
 		<!-- Main Content Container - using full viewport height -->
-		<div class="content-wrapper min-h-screen p-[10px] relative">
+		<div class="content-wrapper h-dvh p-[10px] relative">
 			
 			<slot />
 			
@@ -49,20 +49,24 @@ import { Icon } from 'astro-icon/components'
 			<div class="floating-nav">
 				<nav class="text-[14px] text-black br-minimal-nav">
 					<div class="flex items-center">
-						<a href="#" id="nav-home">
+						<a href="#" id="nav-home" class="group relative">
 							<Icon name="heroicons:home" class="h-5 w-5" />
+							<span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:visible">Home</span>
 						</a>
 						<div class="mx-2 border-t w-8 menu-divider"></div>
-						<a href="#" id="nav-projects">
+						<a href="#" id="nav-projects" class="group relative">
 							<Icon name="heroicons:folder-open" class="h-5 w-5" />
+							<span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:visible">Projects</span>
 						</a>
 						<div class="mx-2 border-t w-8 menu-divider"></div>
-						<a href="#" id="nav-contact">
+						<a href="#" id="nav-contact" class="group relative">
 							<Icon name="heroicons:envelope" class="h-5 w-5" />
+							<span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:visible">Contact</span>
 						</a>
 						<div class="mx-2 border-t w-8 menu-divider"></div>
-						<a href="#" id="nav-explanation">
+						<a href="#" id="nav-explanation" class="group relative">
 							<Icon name="heroicons:information-circle" class="h-5 w-5" />
+							<span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:visible">Explanation</span>
 						</a>
 					</div>
 				</nav>
@@ -70,260 +74,6 @@ import { Icon } from 'astro-icon/components'
 		</div>
 		
 		<script src="../scripts/index.js"></script>
-		
-		<script is:inline>
-			// TODO: remove
 
-			window.addEventListener('load', () => {
-				// Navigation menu handlers
-				const navHome = document.getElementById('nav-home');
-				const navProjects = document.getElementById('nav-projects');
-				const navContact = document.getElementById('nav-contact');
-				const navExplanation = document.getElementById('nav-explanation');
-				
-				// Function to update active navigation state
-				function updateActiveNavItem() {
-					// Remove active class from all nav items
-					document.querySelectorAll('.br-minimal-nav a').forEach(item => {
-						item.classList.remove('active');
-					});
-					
-					// Find the container with order = 1 (the currently visible one)
-					const containers = document.querySelectorAll('.br_container');
-					let activeContainer = null;
-					
-					containers.forEach(container => {
-						const orderValue = parseInt(container.style.getPropertyValue('--order') || '0');
-						if (orderValue === 1) {
-							activeContainer = container;
-						}
-					});
-					
-					// If found, activate the corresponding nav item
-					if (activeContainer) {
-						const navId = activeContainer.getAttribute('data-nav-id');
-						if (navId) {
-							const navItem = document.getElementById(navId);
-							if (navItem) {
-								navItem.classList.add('active');
-							}
-						}
-					}
-				}
-				
-				// Function to decrement all containers
-				function decrementAllContainers() {
-					const containers = document.querySelectorAll('.br_container');
-					const maxBlocks = containers.length;
-					
-					// Define minimum limit (one less than max blocks)
-					const minLimit = -(maxBlocks - 1);
-					
-					// Check if any container is already at the minimum limit
-					let atMinimumLimit = false;
-					containers.forEach(container => {
-						const orderValue = container.style.getPropertyValue('--order');
-						if (orderValue && parseInt(orderValue) === minLimit) {
-							atMinimumLimit = true;
-						}
-					});
-					
-					// If at limit, show message and stop
-					if (atMinimumLimit) {
-						console.log(`Cannot decrement: A container is already at minimum value (${minLimit})`);
-						return;
-					}
-					
-					// Proceed with decrementing all containers
-					containers.forEach(container => {
-						// Get current order (as string or number)
-						let order = container.style.getPropertyValue('--order');
-						
-						// If empty, try to get from data-order attribute
-						if (!order) {
-							order = container.getAttribute('data-order') || '0';
-						}
-						
-						// Convert to number
-						let currentOrder = parseInt(order);
-						
-						// Skip zero when decrementing
-						let newOrder;
-						if (currentOrder === 1) {
-							newOrder = -1; // Skip zero when going from 1 to negative
-						} else {
-							newOrder = currentOrder - 1;
-						}
-						
-						// Update order value
-						container.style.setProperty('--order', newOrder);
-						
-						// Update classes based on order sign
-						if (currentOrder > 0 && newOrder < 0) {
-							// Going from positive to negative: add above class, remove default
-							container.classList.remove('br_container--default-state');
-							container.classList.add('br_container--above');
-							console.log(`Changed class: default -> above (${currentOrder} -> ${newOrder})`);
-						} else if (currentOrder < 0 && newOrder > 0) {
-							// Going from negative to positive: add default class, remove above
-							container.classList.add('br_container--default-state');
-							container.classList.remove('br_container--above');
-							console.log(`Changed class: above -> default (${currentOrder} -> ${newOrder})`);
-						}
-					});
-					
-					// Update active menu item after decrement
-					setTimeout(updateActiveNavItem, 100);
-				}
-				
-				// Function to increment all containers
-				function incrementAllContainers() {
-					const containers = document.querySelectorAll('.br_container');
-					const maxBlocks = containers.length;
-					
-					// Check if any container is already at the maximum limit
-					let atMaximumLimit = false;
-					containers.forEach(container => {
-						const orderValue = container.style.getPropertyValue('--order');
-						if (orderValue && parseInt(orderValue) === maxBlocks) {
-							atMaximumLimit = true;
-						}
-					});
-					
-					// If at limit, show message and stop
-					if (atMaximumLimit) {
-						console.log(`Cannot increment: A container is already at maximum value (${maxBlocks})`);
-						return;
-					}
-					
-					// Proceed with incrementing all containers
-					containers.forEach(container => {
-						// Get current order (as string or number)
-						let order = container.style.getPropertyValue('--order');
-						
-						// If empty, try to get from data-order attribute
-						if (!order) {
-							order = container.getAttribute('data-order') || '0';
-						}
-						
-						// Convert to number
-						let currentOrder = parseInt(order);
-						
-						// Skip zero when incrementing
-						let newOrder;
-						if (currentOrder === -1) {
-							newOrder = 1; // Skip zero when going from negative to positive
-						} else {
-							newOrder = currentOrder + 1;
-						}
-						
-						// Update order value
-						container.style.setProperty('--order', newOrder);
-						
-						// Update classes based on order sign
-						if (currentOrder > 0 && newOrder < 0) {
-							// Going from positive to negative: add above class, remove default
-							container.classList.remove('br_container--default-state');
-							container.classList.add('br_container--above');
-							console.log(`Changed class: default -> above (${currentOrder} -> ${newOrder})`);
-						} else if (currentOrder < 0 && newOrder > 0) {
-							// Going from negative to positive: add default class, remove above
-							container.classList.add('br_container--default-state');
-							container.classList.remove('br_container--above');
-							console.log(`Changed class: above -> default (${currentOrder} -> ${newOrder})`);
-						}
-					});
-					
-					// Update active menu item after increment
-					setTimeout(updateActiveNavItem, 100);
-				}
-				
-				// Navigate to specific views using the increment/decrement logic
-				function navigateToView(targetBaseOrder) {
-					// Get current state
-					const containers = document.querySelectorAll('.br_container');
-					
-					// 1. Find the current base order (the smallest order value)
-					let currentBaseOrder = Number.MAX_SAFE_INTEGER;
-					containers.forEach(container => {
-						const orderVal = parseInt(container.style.getPropertyValue('--order') || '1');
-						if (orderVal < currentBaseOrder) {
-							currentBaseOrder = orderVal;
-						}
-					});
-					
-					// 2. Calculate how many steps to increment or decrement
-					// Skip zero in calculations
-					let stepsToMove = targetBaseOrder - currentBaseOrder;
-					if (currentBaseOrder < 0 && targetBaseOrder > 0) {
-						// When crossing from negative to positive, account for skipping zero
-						stepsToMove -= 1;
-					} else if (currentBaseOrder > 0 && targetBaseOrder < 0) {
-						// When crossing from positive to negative, account for skipping zero
-						stepsToMove += 1;
-					}
-					
-					console.log(`Current base: ${currentBaseOrder}, Target: ${targetBaseOrder}, Steps: ${stepsToMove}`);
-					
-					// 3. Execute the required steps
-					if (stepsToMove < 0) {
-						// Need to decrement
-						for (let i = 0; i > stepsToMove; i--) {
-							decrementAllContainers();
-						}
-					} else if (stepsToMove > 0) {
-						// Need to increment
-						for (let i = 0; i < stepsToMove; i++) {
-							incrementAllContainers();
-						}
-					}
-					
-					// Update active menu item after transition
-					setTimeout(updateActiveNavItem, 100);
-				}
-				
-				// Add keyboard event listener for arrow keys
-				document.addEventListener('keydown', (e) => {
-					// Handle arrow up/down keys
-					if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-						e.preventDefault();
-						console.log("Arrow up/left pressed - decrementing order");
-						decrementAllContainers();
-					} else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-						e.preventDefault();
-						console.log("Arrow down/right pressed - incrementing order");
-						incrementAllContainers();
-					}
-				});
-				
-				// Initial check for active menu item
-				updateActiveNavItem();
-				
-				// Add click handlers to navigation items
-				navHome.addEventListener('click', (e) => {
-					e.preventDefault();
-					console.log("Setting Home view (orders 1 to 8)");
-					navigateToView(1); // Home: orders 1 to 8
-				});
-				
-				navProjects.addEventListener('click', (e) => {
-					e.preventDefault();
-					console.log("Setting Projects view (orders -1 to 7)");
-					navigateToView(-1); // Projects: orders -1 to 7
-				});
-				
-				navContact.addEventListener('click', (e) => {
-					e.preventDefault();
-					console.log("Setting Contact view (orders -6 to 2)");
-					navigateToView(-6); // Contact: orders -6 to 2
-				});
-				
-				navExplanation.addEventListener('click', (e) => {
-					e.preventDefault();
-					console.log("Setting Explanation view (orders -7 to 1)");
-					navigateToView(-7); // Explanation: orders -7 to 1
-				});
-			});
-		</script>
 	</body>
 </html>

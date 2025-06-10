@@ -63,11 +63,11 @@ export function initDOM() {
     
     // Only update if the actual count is different from the CSS value
     if (blockCount.toString() !== currentMaxBlocks) {
-      console.log(`Updating --max-blocks from ${currentMaxBlocks} to ${blockCount}`);
       document.documentElement.style.setProperty('--max-blocks', blockCount);
     }
   };
   
   // Update max blocks count
   updateMaxBlocks();
+  
 }

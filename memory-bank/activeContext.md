@@ -1,54 +1,47 @@
 # BrainRoad Labs Website - Active Context
 
 ## Current Work Focus
+The primary focus is to **refine and enhance the custom navigation system**, which is now centralized in `src/scripts/navigation.js`. This involves:
+1.  Ensuring robust and smooth gesture handling for mouse wheel, touch, and keyboard interactions.
+2.  Improving the state management for active sections and navigation UI.
+3.  Optimizing the transition performance.
 
-The current focus of the BrainRoad Labs website project is implementing and refining the custom scroll transition mechanism. This is a core feature that creates a unique user experience by providing smooth transitions between different sections of the site.
+A secondary focus is **populating placeholder content** in several key sections (`Contact`, `Explanation`, `Unlck-u`, and parts of `Project`).
 
-## Recent Changes
+## Recent Changes (based on current codebase state)
+- **Navigation Logic Centralized**: The navigation logic, previously in an inline script, has been moved to `src/scripts/navigation.js`.
+- **Dependencies Updated**: `astro` to v5.8.0, with additions like `@vercel/analytics`, `@vercel/speed-insights`, and `astro-icon`.
+- **New Component**: `Unlck-u.astro` was added to the page structure.
+- **Dynamic Styling**: The project heavily relies on CSS custom properties (`--order`, `--viewport-height`, etc.) for layout and animations, controlled via JavaScript.
+- **Modular Scripts**: Features like the splash screen, responsive headers, and interactive bubble are handled by dedicated modules in `src/scripts/`.
 
-1. **Basic Structure Implementation**: The basic structure of the website has been set up with Astro and Tailwind CSS.
-2. **Component Creation**: Core components (Home, Project, Contact, Explanation, Credits) have been created.
-3. **Layout Development**: The main layout with splash screen and gradient background has been implemented.
-4. **Initial Scroll Transition**: A first version of the scroll transition mechanism has been implemented in `scrollTransition.js`.
-5. **Responsive Design**: Basic responsive design has been implemented using Tailwind's orientation variants.
-
-## Next Steps
-
-Based on the TODOs found in the codebase, the following tasks are prioritized:
-
-1. **Implement scrollTransitionV2.js**: The current version is empty and needs to be filled with improved scroll transition logic.
-2. **CSS for Vertical Mode**: Handle CSS for blocks in vertical mode (portrait orientation) transitions.
-3. **Menu Interaction**: Implement hover effects on the navigation menu and highlight the active section.
-4. **Touch and Wheel Coordination**: Improve the coordination between touch and wheel events for smoother scrolling.
-5. **Logo and Splash Screen**: Complete the logo design and finish the splash screen implementation.
-6. **Clean Up Layout**: Remove temporary elements and clean up the Layout.astro file.
-7. **SEO Optimization**: Add meta tags for SEO in Layout.astro.
-8. **Favicon**: Create and implement a favicon based on the BrainRoad Labs logo.
-9. **Cross-browser Testing**: Test the website on multiple browsers and devices.
-10. **Mobile Testing**: Ensure proper functionality on mobile devices.
+## Next Steps (Prioritized)
+1.  **Refine `navigation.js`**:
+    *   Enhance gesture handling (wheel, touch) for a smoother experience.
+    *   Ensure correct state management for the active navigation item.
+2.  **Fill Placeholder Content**:
+    *   `Contact.astro`
+    *   `Explanation.astro`
+    *   `Unlck-u.astro`
+    *   Update `Project.astro` descriptions.
+3.  **Address Navigation `data-nav-id`**: Correct the `data-nav-id` for `Credits.astro` and `Unlck-u.astro`.
+4.  **Complete UI Elements**: Integrate the final logo and polish the splash screen.
+5.  **Code Cleanup**: Systematically review and address all `TODO` comments.
 
 ## Active Decisions and Considerations
+- **Navigation System**: The core logic is now consolidated in `src/scripts/navigation.js`, which manipulates CSS `--order` properties. The key decision is how to enhance this system for better gesture support and performance.
+- **User Experience**: Balancing the unique navigation with intuitive usability across all devices remains a top priority.
+- **Performance of Animations**: The gradient background and section transitions need to be monitored for performance, especially on less powerful devices.
 
-1. **Scroll Mechanism Approach**: Deciding between improving the current scroll transition implementation or creating a completely new version in scrollTransitionV2.js.
-2. **Navigation UX**: Balancing the unique scroll experience with intuitive navigation to ensure users can easily find and access content.
-3. **Performance Optimization**: Ensuring smooth animations and transitions, especially with the gradient background effects.
-4. **Responsive Design Strategy**: Refining the approach to handle different screen orientations and sizes effectively.
-
-## Important Patterns and Preferences
-
-1. **Component Organization**: Each section of the website is contained in its own Astro component.
-2. **CSS Methodology**: Using a combination of Tailwind utility classes and custom CSS with variables.
-3. **JavaScript Modularity**: Keeping functionality separated into distinct modules for better organization.
-4. **Design Aesthetics**: 
-   - Clean, minimal design
-   - Rounded corners (20px radius)
-   - Gradient colors for visual interest
-   - Monospace font (Geist Mono) for body text
-   - Sans-serif font (Geist) for headings
+## Important Patterns and Preferences (Observed)
+- **Component-Driven Structure**: Sections are well-encapsulated Astro components.
+- **CSS Custom Properties for Dynamic Styling**: Heavily used for theming, animation parameters, and layout control (e.g., `--order` for section state).
+- **Utility-First (Tailwind) with Custom CSS**: Tailwind for general layout and utilities, with significant custom CSS in `global.css` for complex visuals and animations.
+- **Modular JavaScript**: Client-side JavaScript is broken into modules by feature, initialized from `index.js`.
+- **Responsive Design via Orientation**: `@media (orientation: landscape/portrait)` is a core part of the responsive strategy.
+- **Clear TODOs**: The codebase contains many `TODO` comments, indicating areas for future work.
 
 ## Learnings and Project Insights
-
-1. **Custom Scroll Challenges**: Implementing a custom scroll behavior that feels natural requires careful attention to gesture detection and smooth transitions.
-2. **CSS Variables Power**: Using CSS custom properties (variables) for dynamic values has proven effective for managing the scroll transition states.
-3. **Astro Advantages**: The Astro framework provides a good balance of static site generation with dynamic capabilities.
-4. **Orientation Responsiveness**: Designing for both landscape and portrait orientations requires different approaches to layout and component sizing.
+- **Centralized Navigation Logic**: Consolidating the navigation logic into `navigation.js` has simplified the architecture. The `--order`-based system remains a clever and effective way to manage section transitions.
+- **Power of CSS Variables**: The project continues to demonstrate the power of CSS custom properties for creating dynamic and state-driven animations.
+- **Iterative Refinement**: The evolution from an inline script to a dedicated `navigation.js` module shows a clear iterative process toward a more robust and maintainable solution.

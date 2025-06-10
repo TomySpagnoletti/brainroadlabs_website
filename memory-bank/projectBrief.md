@@ -1,38 +1,48 @@
 # BrainRoad Labs Website
 
 ## Project Overview
-This project is a website for BrainRoad Labs, developed with Astro and Tailwind CSS. The site uses custom scroll transitions and responsive design based on screen orientation.
+This project is the official website for BrainRoad Labs, developed with Astro and Tailwind CSS. The site aims to showcase the company's skills and services through an innovative user experience, featuring custom scroll transitions and a responsive design that adapts to screen orientation.
 
 ## Core Requirements and Goals
-- Create a modern, responsive website that adapts to different screen orientations
-- Implement smooth scroll transitions between sections
-- Provide an intuitive user interface with a navigation menu
-- Ensure accessibility and performance
+- Create a modern, responsive website adapting to different screen orientations.
+- Implement smooth, engaging scroll transitions between content sections.
+- Provide an intuitive user interface with clear navigation.
+- Showcase BrainRoad Labs' technical capabilities and project portfolio.
+- Ensure good performance and accessibility.
 
 ## High-level Overview
-The BrainRoad Labs website serves as a showcase for the company's projects and services. It features a custom scrolling mechanism that transitions between different sections of the site, creating an engaging user experience. The design is responsive and adapts to both landscape and portrait orientations using Tailwind's orientation variants.
+The BrainRoad Labs website presents information in distinct sections navigated via a custom mechanism. The implementation uses CSS custom properties (`--order`) to manage section visibility and transitions, controlled by `src/scripts/navigation.js`. The design is responsive, leveraging Tailwind's orientation variants.
 
 ## Technologies
-- **Framework**: Astro v5.6.0
+- **Framework**: Astro v5.8.0
 - **CSS Framework**: Tailwind CSS v4.1.1
-- **Tailwind Integration**: @tailwindcss/vite v4.1.1
+- **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
+- **Icon Toolkit**: `astro-icon` with Heroicons
+- **Analytics**: Vercel Analytics & Speed Insights
+- **JavaScript**: Vanilla JavaScript (ES Modules)
+- **Fonts**: Geist, Geist Mono
 - **Node**: v20+ recommended
 - **Package Manager**: npm
 
 ## Project Structure
-- Components in src/components/
-- Layouts in src/layouts/
-- Pages in src/pages/
-- Assets in src/assets/
-- Global styles in src/styles/
-- Scripts in src/scripts/
+- Components: `src/components/` (Home, Project, Contact, Explanation, Credits, Unlck-u)
+- Layouts: `src/layouts/` (Layout.astro)
+- Pages: `src/pages/` (index.astro)
+- Assets: `src/assets/`, `public/`
+- Global styles: `src/styles/`
+- Scripts: `src/scripts/`
 
-## Current Features
-- Custom scroll transitions
-- Responsive design based on screen orientation
-- User interface with menu and sections
+## Current Features (as of analysis)
+- Splash screen on entry.
+- Animated gradient background with interactive bubble.
+- Section-based layout with a floating navigation menu.
+- Custom scroll transition mechanism managed by `src/scripts/navigation.js`.
+- Responsive design adapting to screen orientation (portrait/landscape).
+- Responsive header elements (title/badge).
+- Placeholder content in several sections.
 
 ## Design Preferences
-- **Responsive Design**: Adapt layouts based on screen orientation using Tailwind's orientation variants
-- Clean, minimal design
-- Rounded corners (20px radius)
+- Clean, minimal design aesthetic.
+- Rounded corners (e.g., 20px radius).
+- Use of gradient colors for visual interest.
+- Responsive layouts adapting to screen orientation.

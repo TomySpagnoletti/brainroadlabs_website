@@ -53,11 +53,10 @@ flowchart TD
    - Tool usage patterns
 
 6. `progress.md`
-   - What works
-   - What's left to build
-   - Current status
-   - Known issues
-   - Evolution of project decisions
+   - List of tasks remaining to be done.
+   - Current status of ongoing tasks.
+   - Known issues blocking progress.
+   - Evolution of project decisions impacting upcoming work.
 
 ### Additional Context
 Create additional files/folders within memory-bank/ when they help organize:

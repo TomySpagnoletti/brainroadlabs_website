@@ -2,83 +2,69 @@
 
 ## System Architecture
 
-The BrainRoad Labs website is built using a component-based architecture with Astro as the main framework. The system is designed around the following key architectural patterns:
+The BrainRoad Labs website is built with Astro, employing a component-based architecture for its frontend.
 
-### Component Structure
-- **Layout Component**: Serves as the main wrapper for all pages, containing common elements like the splash screen, background, and navigation.
-- **Section Components**: Individual content sections (Home, Projects, Contact, Explanation, Credits) that are stacked and manipulated by the scroll transition system.
-- **Utility Components**: Smaller, reusable components that provide specific functionality.
+### Core Architectural Components
+- **Main Layout (`Layout.astro`)**: Serves as the global wrapper. It includes:
+    - Splash screen.
+    - Animated gradient background with an interactive bubble.
+    - A central `<slot />` for page-specific content.
+    - A floating navigation menu.
+    - A script (`src/scripts/navigation.js`) that manages the primary section navigation logic.
+- **Page (`index.astro`)**: The main entry page that assembles various section components within the `Layout`.
+- **Section Components (`src/components/*.astro`)**: Individual, self-contained UI blocks representing different parts of the website (e.g., Home, Project, Contact). Each is typically a `.br_container`.
 
-### Page Composition
-- Pages are composed by importing and assembling components.
-- The main index page imports all section components and arranges them in the desired order.
+## Key Technical Decisions & Patterns
 
-## Key Technical Decisions
+### Custom Scroll & Navigation Mechanism
+- **CSS Custom Property Driven**: The current active navigation system relies heavily on a CSS custom property `--order` applied to `.br_container` elements.
+    - Positive `--order` values generally correspond to sections "below" the current view, stacking with decreasing opacity and z-translation.
+    - Negative `--order` values correspond to sections "above" the current view, often styled with a 3D perspective tilt.
+    - The section with `--order: 1` is considered the "active" or "front" section.
+- **JavaScript Control**:
+    - `src/scripts/navigation.js` handles click events on navigation items and keyboard (arrow key) events. It updates the `--order` values on all containers to simulate scrolling through sections.
+    - `src/scripts/initDOM.js` initializes container classes based on their initial `--order` values.
 
-### Custom Scroll Mechanism
-- Implemented a custom scroll transition system that overrides the default browser scrolling behavior.
-- Uses CSS custom properties (variables) and JavaScript to control the position and appearance of sections.
-- Sections are assigned an `--order` value that determines their position in the stack.
+### Responsive Design
+- **Orientation-Based**: Layouts adapt primarily based on screen orientation (`portrait` vs. `landscape`) using Tailwind CSS variants and custom media queries in `global.css`.
+- **Dynamic Sizing**: CSS custom properties like `--container-landscape`, `--container-portrait`, and `--viewport-height` are used to control container dimensions.
+- **Header Adjustment**: `src/scripts/responsiveHeaders.js` dynamically adjusts the layout of title and badge elements within headers to prevent overlap on smaller screens.
 
-### Responsive Design Approach
-- Uses Tailwind CSS for responsive styling.
-- Implements orientation-specific layouts using Tailwind's orientation variants.
-- Adjusts container dimensions based on screen orientation (landscape vs. portrait).
+### State Management (UI)
+- **CSS-Driven State**: The visual state of sections (position, opacity, transform) is largely managed by CSS rules reacting to the `--order` custom property.
+- **Class Toggling**: JavaScript is used to toggle classes (e.g., `br_splash--hidden`, `.br_container--default-state`, `.br_container--above`) to trigger transitions or apply state-specific styles.
+- **Navigation State**: The active navigation item is highlighted based on which section container has `--order: 1`, managed by `src/scripts/navigation.js`.
 
-### Animation and Transitions
-- Smooth transitions between sections using CSS transforms and transitions.
-- Interactive background with animated gradient bubbles.
-- Splash screen with fade-out animation.
+### Visual & Animation Patterns
+- **Animated Gradient Background**: Uses multiple CSS animated `div` elements (`.g1` to `.g5`) with radial gradients, `mix-blend-mode`, and an SVG `feGaussianBlur` filter (`#goo`) to create a "lava lamp" or "metaball" effect. An additional `.interactive` div follows the cursor.
+- **Splash Screen**: Simple fade-out animation controlled by `src/scripts/splashScreen.js` and CSS transitions.
+- **Component Stacking**: `.br_container` elements are stacked using CSS Grid (`grid-template-areas: "stack"`) within the `.content-wrapper`. Their `z-index` is dynamically calculated based on `--order`.
 
-## Design Patterns in Use
-
-### Observer Pattern
-- Used in scroll event handling to detect and respond to user scroll actions.
-- Touch events are also observed and translated into appropriate scroll actions.
-
-### Factory Pattern
-- Component initialization follows a factory-like pattern where each component's initialization function is called from a central location.
-
-### State Management
-- Section state (current position, visibility) is managed through CSS custom properties and class toggling.
-- Navigation state is tracked to ensure proper section transitions.
-
-## Component Relationships
+## Component Relationships (Simplified)
 
 ```
-Layout (Layout.astro)
-├── Splash Screen
-├── Background (Gradient Bubbles)
-├── Content Wrapper
-│   ├── Home Component
-│   ├── Project Component
-│   ├── Contact Component
-│   ├── Explanation Component
-│   └── Credits Component
-└── Navigation Menu
+Layout.astro
+├── SplashScreen
+├── GradientBackground (with InteractiveBubble)
+├── ContentWrapper (CSS Grid for stacking)
+│   └── <slot /> (receives page content, e.g., from index.astro)
+│       ├── HomeComponent
+│       ├── ProjectComponent (generates multiple project views)
+│       ├── ContactComponent
+│       ├── ExplanationComponent
+│       ├── CreditsComponent
+│       └── UnlckUComponent
+└── FloatingNavMenu
 ```
-
-## Critical Implementation Paths
-
-### Scroll Transition System
-1. User initiates scroll (wheel or touch)
-2. Event listeners detect the scroll action
-3. The scroll direction is determined
-4. Section order values are updated
-5. CSS transitions animate the sections to their new positions
-
-### Responsive Adaptation
-1. CSS media queries detect screen orientation
-2. Container dimensions adjust based on orientation
-3. Layout adapts to provide optimal viewing experience
-
-### Interactive Elements
-1. Mouse/touch position is tracked
-2. Background elements respond to user interaction
-3. Navigation menu allows direct jumping to specific sections
 
 ## Data Flow
+- **Static Content**: Most textual content is hardcoded within the `.astro` components. The `Project.astro` component iterates over a JavaScript array of project data.
+- **User Interaction -> JS -> CSS Variables/Classes**:
+    - User actions (clicks on nav, key presses) are captured by `src/scripts/navigation.js`. Mouse movements are handled by `src/scripts/interactiveBubble.js`.
+    - JS updates CSS custom properties (like `--order`) or toggles CSS classes on elements.
+    - CSS then applies new styles and transitions based on these changes.
 
-- **Static Content**: Most content is static and defined directly in the component files.
-- **User Interaction**: User interactions (scroll, touch, clicks) are captured by event listeners.
-- **Visual State**: The visual state of the application is primarily controlled through CSS custom properties and class manipulation.
+## Noteworthy Patterns & TODOs
+- **Centralized Scroll Logic**: The navigation logic has been centralized in `src/scripts/navigation.js`, which is a significant improvement over the previous inline script.
+- **Placeholder Content**: Several components (`Contact`, `Explanation`, `Unlck-u`, parts of `Project`) contain placeholder "XXX" content.
+- **`data-nav-id` Duplication**: `Credits.astro` and `Unlck-u.astro` share the `data-nav-id="nav-explanation"`, which might affect navigation highlighting for these sections.
