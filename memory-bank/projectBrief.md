@@ -14,7 +14,7 @@ This project is the official website for BrainRoad Labs, developed with Astro an
 The BrainRoad Labs website presents information in distinct sections navigated via a custom mechanism. The implementation uses CSS custom properties (`--order`) to manage section visibility and transitions, controlled by `src/scripts/navigation.js`. The design is responsive, leveraging Tailwind's orientation variants.
 
 ## Technologies
-- **Framework**: Astro v5.8.0
+- **Framework**: Astro v5.10.0
 - **CSS Framework**: Tailwind CSS v4.1.1
 - **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
 - **Icon Toolkit**: `astro-icon` with Heroicons
@@ -33,7 +33,7 @@ The BrainRoad Labs website presents information in distinct sections navigated v
 - Scripts: `src/scripts/`
 
 ## Current Features (as of analysis)
-- Splash screen on entry.
+- Lottie-based splash screen on entry.
 - Animated gradient background with interactive bubble.
 - Section-based layout with a floating navigation menu.
 - Custom scroll transition mechanism managed by `src/scripts/navigation.js`.

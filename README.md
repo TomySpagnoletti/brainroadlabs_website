@@ -13,11 +13,11 @@ Our site serves as both a portfolio of our work and a demonstration of our techn
 - **Interactive Elements**: Dynamic animated gradient background with a cursor-following bubble.
 - **Modern Technology Stack**: Built with Astro, Tailwind CSS, and Vanilla JavaScript.
 - **Component-Based**: Modular design using Astro components.
-- **Splash Screen**: Initial loading animation.
+- **Splash Screen**: Initial loading animation using Lottie.
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Astro v5.8.0
+- **Framework**: Astro v5.10.0
 - **CSS Framework**: Tailwind CSS v4.1.1
 - **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
 - **Icon Toolkit**: `astro-icon` (with Heroicons)

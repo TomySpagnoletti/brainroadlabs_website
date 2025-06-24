@@ -3,7 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) or other AI assistants when working with code in this repository.
 
 ## Technologies
-- **Framework**: Astro v5.8.0
+- **Framework**: Astro v5.10.0
 - **CSS Framework**: Tailwind CSS v4.1.1
 - **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
 - **Icon Toolkit**: `astro-icon` (using Heroicons via `@iconify-json/heroicons`)
@@ -34,7 +34,7 @@ This file provides guidance to Claude Code (claude.ai/code) or other AI assistan
 - **JavaScript**:
     - Write modular ES6 JavaScript.
     - Client-side scripts are typically located in `src/scripts/`.
-    - `src/scripts/index.js` serves as the main entry point for initializing JS features like `navigation.js`.
+    - `src/scripts/index.js` serves as the main entry point for initializing JS features.
 - **TypeScript**: Project uses JavaScript primarily, but Astro has built-in TypeScript support. Follow strict TypeScript configuration if/when TS files are added.
 - **Error Handling**: Use appropriate error boundaries and patterns as per Astro/JS best practices.
 - **Media**: Place images and other static assets in `public/` or `src/assets/` as appropriate.
@@ -60,3 +60,4 @@ This file provides guidance to Claude Code (claude.ai/code) or other AI assistan
 - Only perform the tasks explicitly requested.
 - When removing code, delete it entirely rather than commenting it out, unless the commented code serves a specific explanatory purpose for future reference.
 - The custom scroll mechanism is managed in `src/scripts/navigation.js` and is based on manipulating the CSS `--order` property.
+- The splash screen is implemented using Lottie (`LottieSplash.astro`) and `@lottiefiles/dotlottie-web`.

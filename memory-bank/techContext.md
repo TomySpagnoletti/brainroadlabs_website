@@ -3,7 +3,7 @@
 ## Technologies Used
 
 ### Core Framework
-- **Astro v5.8.0**: Static site builder for component-based development.
+- **Astro v5.10.0**: Static site builder for component-based development.
 
 ### CSS & Styling
 - **Tailwind CSS v4.1.1**: Utility-first CSS framework.
@@ -25,7 +25,8 @@
     - Responsive header adjustments (`responsiveHeaders.js`).
     - Splash screen handling (`splashScreen.js`).
     - Scroll transition logic:
-      - `src/scripts/navigation.js`: Manages the core navigation logic by manipulating CSS `--order` properties.
+    - `src/scripts/navigation.js`: Manages the core navigation logic by manipulating CSS `--order` properties.
+    - **Lottie Animations**: The splash screen is now a Lottie animation handled by `src/components/LottieSplash.astro` and the `@lottiefiles/dotlottie-web` package.
 
 ### UI & UX
 - **Icons**: `astro-icon` v1.1.5 with `@iconify-json/heroicons` v1.2.2.
@@ -72,7 +73,8 @@
 ## Dependencies (from `package.json`)
 
 ### Main Dependencies
-- `astro`: ^5.8.0
+- `astro`: ^5.10.0
+- `@lottiefiles/dotlottie-web`: ^0.46.0
 - `tailwindcss`: ^4.1.1
 - `@tailwindcss/vite`: ^4.1.1
 - `astro-icon`: ^1.1.5
@@ -94,6 +96,7 @@
 - DOM manipulation for dynamic styling and behavior (e.g., setting CSS variables, class toggling).
 - Event listeners for user interactions (scroll, touch, mousemove, resize, keydown) and lifecycle events (`DOMContentLoaded`).
 - The scroll/navigation logic is now centralized in `src/scripts/navigation.js`, which is initialized from `index.js`.
+- The splash screen is implemented using Lottie.
 
 ### Build and Deployment
 - Astro handles the build process.

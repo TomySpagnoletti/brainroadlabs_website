@@ -6,7 +6,7 @@ The BrainRoad Labs website is built with Astro, employing a component-based arch
 
 ### Core Architectural Components
 - **Main Layout (`Layout.astro`)**: Serves as the global wrapper. It includes:
-    - Splash screen.
+    - Lottie-based splash screen (`LottieSplash.astro`).
     - Animated gradient background with an interactive bubble.
     - A central `<slot />` for page-specific content.
     - A floating navigation menu.
@@ -29,6 +29,7 @@ The BrainRoad Labs website is built with Astro, employing a component-based arch
 - **Orientation-Based**: Layouts adapt primarily based on screen orientation (`portrait` vs. `landscape`) using Tailwind CSS variants and custom media queries in `global.css`.
 - **Dynamic Sizing**: CSS custom properties like `--container-landscape`, `--container-portrait`, and `--viewport-height` are used to control container dimensions.
 - **Header Adjustment**: `src/scripts/responsiveHeaders.js` dynamically adjusts the layout of title and badge elements within headers to prevent overlap on smaller screens.
+- **Scrollbar Hiding**: Custom CSS is used to hide scrollbars within `.br_container` elements for a cleaner look.
 
 ### State Management (UI)
 - **CSS-Driven State**: The visual state of sections (position, opacity, transform) is largely managed by CSS rules reacting to the `--order` custom property.
@@ -37,14 +38,14 @@ The BrainRoad Labs website is built with Astro, employing a component-based arch
 
 ### Visual & Animation Patterns
 - **Animated Gradient Background**: Uses multiple CSS animated `div` elements (`.g1` to `.g5`) with radial gradients, `mix-blend-mode`, and an SVG `feGaussianBlur` filter (`#goo`) to create a "lava lamp" or "metaball" effect. An additional `.interactive` div follows the cursor.
-- **Splash Screen**: Simple fade-out animation controlled by `src/scripts/splashScreen.js` and CSS transitions.
+- **Splash Screen**: A Lottie animation is displayed on entry, managed by the `LottieSplash.astro` component. The old `splashScreen.js` has been removed.
 - **Component Stacking**: `.br_container` elements are stacked using CSS Grid (`grid-template-areas: "stack"`) within the `.content-wrapper`. Their `z-index` is dynamically calculated based on `--order`.
 
 ## Component Relationships (Simplified)
 
 ```
 Layout.astro
-├── SplashScreen
+├── LottieSplash
 ├── GradientBackground (with InteractiveBubble)
 ├── ContentWrapper (CSS Grid for stacking)
 │   └── <slot /> (receives page content, e.g., from index.astro)

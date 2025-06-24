@@ -1,6 +1,7 @@
 ---
-import '../styles/global.css'
-import { Icon } from 'astro-icon/components'
+import '../styles/global.css';
+import { Icon } from 'astro-icon/components';
+import LottieSplash from '../components/LottieSplash.astro';
 ---
 
 <!doctype html>
@@ -8,7 +9,12 @@ import { Icon } from 'astro-icon/components'
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon/favicon.ico" />		
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />		
+		<meta name="apple-mobile-web-app-title" content="BrainRoad" />	
+		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +24,7 @@ import { Icon } from 'astro-icon/components'
 	<body>
 		<!-- Splash Screen -->
 		<div id="br_splash" class="br_splash">
-			<div class="br_splash_content">BR</div>
+			<LottieSplash />
 		</div>
 		<div class="gradient-bg">
 			<svg xmlns="http://www.w3.org/2000/svg">

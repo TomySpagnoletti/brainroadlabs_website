@@ -1,3 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo_tapered.svg';
+---
+
 <div class="br_container" data-nav-id="nav-explanation" style="--order: 9;">
     <div class="overflow-auto h-full p-5">
         <div class="br_js_header-container flex flex-wrap items-center mb-2">
@@ -12,13 +17,20 @@
             - UI Library: <a href="https://tailwindcss.com" target="_blank">https://tailwindcss.com</a><br />
             - Icons (with astro-icon): <a href="https://heroicons.com" target="_blank">https://heroicons.com</a><br />
             - Gradient background: <a href="https://github.com/baunov/gradients-bg" target="_blank">https://github.com/baunov/gradients-bg</a><br />
-            - Co-crafted with Claude Code in Italy 🇮🇹 ❤️: <a href="https://claude.ai/code" target="_blank">https://claude.ai/code</a><br />
-            - Played with ClineBot too — not bad at all: <a href="https://cline.bot" target="_blank">https://cline.bot</a><br />
+            - Co-crafted initially with <strong>Claude Code</strong>, in Italy 🇮🇹 ❤️:<br />
+            <span class="ml-10"></span>• <a href="https://claude.ai/code" target="_blank">https://claude.ai/code</a><br />
+            - Then with <strong>ClineBot</strong>, followed by <strong>Roo Code</strong> and Gemini Models:<br />
+            <span class="ml-10"></span>• <a href="https://cline.bot" target="_blank">https://cline.bot</a><br />
+            <span class="ml-10"></span>• <a href="https://roocode.com" target="_blank">https://roocode.com</a><br />
+            <span class="ml-10"></span>• <a href="https://ai.google.dev/gemini-api/docs/models" target="_blank">https://ai.google.dev/gemini-api/docs/models</a><br />
             - <em>A base di caffè Americano <strong>decaffeinato</strong>.</em>
             <br />
             <br />
             => Check out my GitHub repo:<br />
             <a href="https://github.com/TomySpagnoletti/brainroadlabs_website" target="_blank">https://github.com/TomySpagnoletti/brainroadlabs_website</a>
+            <br />
+            <br />
+            <div class="flex justify-center mt-4"><Image src={logo} alt="Brainroad Labs Logo" style="width: 150px; height: 150px;" /></div>
             <br />
             <br />
             <a href="#" id="open-debug-graph">Open Debug Graph</a>

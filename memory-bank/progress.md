@@ -14,7 +14,7 @@
 
 ### Content & UI Completion
 - 🔄 **Fill Placeholder Content**: Populate `Contact.astro`, `Explanation.astro`, `Unlck-u.astro` with actual content.
-- 🔄 **Complete Logo & Splash Screen**: Integrate final logo into splash screen (TODO in `Home.astro`).
+- 🔄 **Complete Logo & Splash Screen**: Integrate final logo. The splash screen has been updated to a Lottie animation.
 - 🔄 **Navigation Menu**:
     - Address potential `data-nav-id` issue for `Credits` and `Unlck-u` sections (both point to `nav-explanation`).
     - Ensure hover effects and active section highlighting are robust.

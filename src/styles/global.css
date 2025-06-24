@@ -5,6 +5,7 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 /* Splash Screen */
@@ -481,4 +482,16 @@ a {
       mix-blend-mode: soft-light !important;
     }
   }
+}
+
+/* Hide scrollbar for elements within br_container */
+.br_container .overflow-auto::-webkit-scrollbar,
+.br_container .overflow-scroll::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.br_container .overflow-auto,
+.br_container .overflow-scroll {
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scrollbar-width: none;  /* For Firefox */
 }

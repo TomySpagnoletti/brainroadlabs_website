@@ -10,10 +10,11 @@ A secondary focus is **populating placeholder content** in several key sections 
 
 ## Recent Changes (based on current codebase state)
 - **Navigation Logic Centralized**: The navigation logic, previously in an inline script, has been moved to `src/scripts/navigation.js`.
-- **Dependencies Updated**: `astro` to v5.8.0, with additions like `@vercel/analytics`, `@vercel/speed-insights`, and `astro-icon`.
+- **Dependencies Updated**: `astro` to v5.10.0, and `@lottiefiles/dotlottie-web` was added for the new splash screen.
+- **Splash Screen Reimplemented**: The splash screen has been rebuilt using Lottie animations (`LottieSplash.astro`), replacing the old JavaScript-based implementation.
 - **New Component**: `Unlck-u.astro` was added to the page structure.
 - **Dynamic Styling**: The project heavily relies on CSS custom properties (`--order`, `--viewport-height`, etc.) for layout and animations, controlled via JavaScript.
-- **Modular Scripts**: Features like the splash screen, responsive headers, and interactive bubble are handled by dedicated modules in `src/scripts/`.
+- **Modular Scripts**: Features like the responsive headers and interactive bubble are handled by dedicated modules in `src/scripts/`.
 
 ## Next Steps (Prioritized)
 1.  **Refine `navigation.js`**:
@@ -44,4 +45,4 @@ A secondary focus is **populating placeholder content** in several key sections 
 ## Learnings and Project Insights
 - **Centralized Navigation Logic**: Consolidating the navigation logic into `navigation.js` has simplified the architecture. The `--order`-based system remains a clever and effective way to manage section transitions.
 - **Power of CSS Variables**: The project continues to demonstrate the power of CSS custom properties for creating dynamic and state-driven animations.
-- **Iterative Refinement**: The evolution from an inline script to a dedicated `navigation.js` module shows a clear iterative process toward a more robust and maintainable solution.
+- **Iterative Refinement**: The evolution from an inline script to a dedicated `navigation.js` module, and the replacement of the JS splash screen with a Lottie animation, shows a clear iterative process toward a more robust and maintainable solution.

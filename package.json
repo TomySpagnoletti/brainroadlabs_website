@@ -9,10 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-web": "^0.46.0",
     "@tailwindcss/vite": "^4.1.1",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
-    "astro": "^5.8.0",
+    "astro": "^5.10.0",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.1.1"
   },
