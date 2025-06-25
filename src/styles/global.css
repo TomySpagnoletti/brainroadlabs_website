@@ -23,14 +23,6 @@ html, body {
   transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
 }
 
-.br_splash_content {
-  font-family: 'Geist', sans-serif;
-  font-weight: 700;
-  font-size: 5rem;
-  @apply text-amber-900;
-  letter-spacing: -0.05em;
-}
-
 .br_splash--hidden {
   opacity: 0;
   visibility: hidden;
@@ -140,6 +132,15 @@ a {
   }
 }
 
+@keyframes delayed-fade-out {
+  0%, 50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.85;
+  }
+}
+
 /* Dynamic bubble background */
 :root {
   --viewport-height: 0;
@@ -239,10 +240,10 @@ a {
 }
 
 .br_container--default-state {
-  --opacity-factor: 0.05;
+  /*--opacity-factor: 0.05;*/
   --translate-z-factor: 100;
   
-  opacity: calc(1 + var(--opacity-factor) - (var(--order) * var(--opacity-factor)));
+  /*opacity: calc(1 + var(--opacity-factor) - (var(--order) * var(--opacity-factor)));*/
   transform: translateZ(calc((var(--translate-z-factor) - (var(--order) * var(--translate-z-factor))) * 1px));
 }
 
@@ -259,7 +260,7 @@ a {
     --translate-y-padding: 57;
   }
   
-  opacity: 0.85;
+  animation: delayed-fade-out 1.2s ease-out forwards;
 
   transform:
       translateY(calc(((var(--viewport-height) / 2 + var(--translate-y-padding)) + (var(--order) * var(--translate-y-factor))) * -1px))

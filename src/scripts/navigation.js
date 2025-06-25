@@ -192,26 +192,31 @@ export function initNavigation() {
   // --- Event Listener Setup ---
   if (navHome)
     navHome.addEventListener("click", (e) => {
+      if (window.isModalOpen) return;
       e.preventDefault();
       navigateToView(1);
     });
   if (navProjects)
     navProjects.addEventListener("click", (e) => {
+      if (window.isModalOpen) return;
       e.preventDefault();
       navigateToView(-1);
     });
   if (navContact)
     navContact.addEventListener("click", (e) => {
+      if (window.isModalOpen) return;
       e.preventDefault();
       navigateToView(-6);
     });
   if (navExplanation)
     navExplanation.addEventListener("click", (e) => {
+      if (window.isModalOpen) return;
       e.preventDefault();
       navigateToView(-7);
     });
 
   document.addEventListener("keydown", (e) => {
+    if (window.isModalOpen) return;
     if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
       e.preventDefault();
       updateAllContainersOrder("decrement");
@@ -229,6 +234,7 @@ export function initNavigation() {
   document.addEventListener(
     "wheel",
     (event) => {
+      if (window.isModalOpen) return;
       event.preventDefault();
       if (scrollDebugGraphInstance) {
         scrollDebugGraphInstance.plotDeltaY(event.deltaY, event.target);
@@ -257,6 +263,7 @@ export function initNavigation() {
   document.addEventListener(
     "touchend",
     (event) => {
+      if (window.isModalOpen) return;
       touchEndY = event.changedTouches[0].screenY;
 
       if (touchTargetScrollableElement) {
