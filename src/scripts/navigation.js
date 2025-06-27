@@ -319,6 +319,7 @@ export function initNavigation() {
     let isSmoothedAccelerationPhaseActive = false;
     let isSmoothedDecelerationPhaseActive = false;
     let trendScrollLock = false; // Lock to ensure one scroll action per gesture
+    let lastGestureDirection = 0; // Stores the direction of the currently locked gesture
     let currentGestureAction = "none"; // Can be 'none', 'navigate', or 'scroll-internal'
     let currentGestureTargetElement = null; // The scrollable element for the current gesture
     let trendScrollLockTimeout = null; // Timeout to prevent a permanently stuck lock
@@ -439,6 +440,19 @@ export function initNavigation() {
 
           // Check for significant INCREASE (start of scroll gesture)
           if (avgAfter > avgBefore * (1 + TREND_SIGNIFICANCE_THRESHOLD_RATIO)) {
+            const newGestureDirection = Math.sign(pointToAnalyze.deltaY);
+
+            // If a new gesture starts in the opposite direction, force-end the previous one.
+            if (
+              trendScrollLock &&
+              newGestureDirection !== 0 &&
+              newGestureDirection !== lastGestureDirection
+            ) {
+              clearTimeout(trendScrollLockTimeout);
+              trendScrollLock = false;
+              isSmoothedAccelerationPhaseActive = false; // Allow reprocessing as a new gesture
+            }
+
             if (!isSmoothedAccelerationPhaseActive) {
               pointToAnalyze.flags.isSmoothedSignificantIncrease = true;
               isSmoothedAccelerationPhaseActive = true;
@@ -446,7 +460,9 @@ export function initNavigation() {
 
               // A gesture is detected. Lock it and decide what action to take for its entire duration.
               if (!trendScrollLock) {
-                const scrollDirection = Math.sign(pointToAnalyze.deltaY);
+                const scrollDirection = newGestureDirection;
+                lastGestureDirection = scrollDirection; // Store direction for the new lock
+
                 currentGestureTargetElement = getScrollableParent(
                   pointToAnalyze.target
                 );
@@ -493,6 +509,7 @@ export function initNavigation() {
                   trendScrollLock = false;
                   currentGestureAction = "none";
                   currentGestureTargetElement = null;
+                  lastGestureDirection = 0; // Reset on timeout
                 }, 500);
               }
             }
@@ -511,6 +528,7 @@ export function initNavigation() {
               trendScrollLock = false;
               currentGestureAction = "none";
               currentGestureTargetElement = null;
+              lastGestureDirection = 0; // Reset on deceleration
             }
           }
         }
@@ -602,11 +620,11 @@ export function initNavigation() {
       ctx.font = "11px Arial";
       ctx.fillStyle = "#333";
       ctx.fillText(
-        `Inertia graph (Smoothed & Raw), MaxY: ${Y_AXIS_SCALE}`,
+        `Inertia graph: Raw (Blue) & Smoothed (Green), MaxY: ${Y_AXIS_SCALE}`,
         5,
         12
       );
-      ctx.fillText(`-MaxY: ${Y_AXIS_SCALE}`, 5, graphCanvas.height - 5);
+      ctx.fillText(`Trend markers: ▲ (start) & ▼ (end) trigger scroll, -MaxY: ${Y_AXIS_SCALE}`, 5, graphCanvas.height - 5);
 
       if (dataPoints.length < 1) return;
 
@@ -706,13 +724,15 @@ export function initNavigation() {
   updateActiveNavItem();
   scrollDebugGraphInstance = initializeDebugGraph();
 
-  const openGraphLink = document.getElementById("open-debug-graph");
-  if (openGraphLink) {
-    openGraphLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (scrollDebugGraphInstance) {
-        scrollDebugGraphInstance.showDebugGraph();
-      }
+  const openGraphLinks = document.querySelectorAll(".open-debug-graph");
+  if (openGraphLinks.length > 0) {
+    openGraphLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (scrollDebugGraphInstance) {
+          scrollDebugGraphInstance.showDebugGraph();
+        }
+      });
     });
   }
 }

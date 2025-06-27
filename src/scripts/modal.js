@@ -16,7 +16,6 @@ export function initImageModal() {
   const zoomableImages = document.querySelectorAll('.zoomable-image');
 
   if (!modalOverlay || !modalImage || !closeButton || !modalContainer) {
-    console.warn('Modal elements not found. Image modal will not be initialized.');
     return;
   }
 

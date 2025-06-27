@@ -205,6 +205,7 @@ a {
 
 /* Main container for BrainRoad Labs components */
 .br_container {
+  position: relative; /* For resize handle positioning */
   z-index: calc(var(--max-blocks) + 1 - var(--order));
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 
@@ -232,6 +233,33 @@ a {
     width: calc(100vw - var(--body-total-padding));
     height: calc(100vh - var(--body-total-padding));
   }
+}
+
+/* Resize Handle - Desktop Landscape Only */
+@media (orientation: landscape) and (min-width: 1024px) and (hover: hover) {
+  .br_container::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.07);
+    border-radius: 2px;
+    cursor: ns-resize;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+  }
+
+  .br_container:hover::after {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Class for animated resize on double-click */
+.br_container--animated-resize {
+  transition: max-height 0.4s ease;
 }
 
 /* For long texts that overflow */
