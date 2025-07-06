@@ -20,7 +20,7 @@ The BrainRoad Labs website presents information in distinct sections navigated v
 - **Icon Toolkit**: `astro-icon` with Heroicons
 - **Analytics**: Vercel Analytics & Speed Insights
 - **JavaScript**: Vanilla JavaScript (ES Modules)
-- **Fonts**: Geist, Geist Mono
+- **Fonts**: Apple SF Pro (Display)
 - **Node**: v20+ recommended
 - **Package Manager**: npm
 

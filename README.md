@@ -22,7 +22,7 @@ Our site serves as both a portfolio of our work and a demonstration of our techn
 - **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
 - **Icon Toolkit**: `astro-icon` (with Heroicons)
 - **JavaScript**: Vanilla JS with modular architecture
-- **Typography**: Geist and Geist Mono fonts
+- **Typography**: Apple SF Pro (Display)
 - **Analytics**: Vercel Analytics & Speed Insights
 - **Node**: v20+ recommended
 

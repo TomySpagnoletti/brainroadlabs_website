@@ -10,7 +10,7 @@
   - Integrated via `@tailwindcss/vite` v4.1.1.
   - Configuration in `tailwind.config.js` includes custom `portrait` and `landscape` screen variants.
 - **Custom CSS**: Extensive custom styles in `src/styles/global.css` for:
-  - Base styling, typography (Geist, Geist Mono).
+  - Base styling, typography: Apple SF Pro (Display).
   - Splash screen, animated badges.
   - Complex gradient background with SVG filters (`#goo`) and animations.
   - Core layout mechanics for section containers (`.br_container`) using CSS custom properties (`--order`, `--viewport-height`, etc.) for 3D-like transitions.
