@@ -11,7 +11,7 @@ export function initNavigation() {
   const navHome = document.getElementById("nav-home");
   const navProjects = document.getElementById("nav-projects");
   const navContact = document.getElementById("nav-contact");
-  const navExplanation = document.getElementById("nav-explanation");
+  const navCredits = document.getElementById("nav-credits");
   const containers = document.querySelectorAll(".br_container");
 
   // --- Input Action Thresholds ---
@@ -208,8 +208,8 @@ export function initNavigation() {
       e.preventDefault();
       navigateToView(-6);
     });
-  if (navExplanation)
-    navExplanation.addEventListener("click", (e) => {
+  if (navCredits)
+    navCredits.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
       navigateToView(-7);

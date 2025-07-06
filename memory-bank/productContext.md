@@ -15,7 +15,7 @@ The BrainRoad Labs website serves as the company's digital presence, designed to
 
 ## How It Should Work (Current & Intended)
 The site is structured as a single-page experience with multiple content sections.
-- **Section-Based Navigation**: Content is divided into distinct sections (Home, Projects, Contact, Explanation, Credits, Unlck-u).
+- **Section-Based Navigation**: Content is divided into distinct sections (Home, Projects, Contact, Credits, Unlck-u).
 - **Custom Scroll/Transition Experience**:
     - Users navigate between these sections using a custom mechanism rather than traditional browser scrolling.
     - The navigation is handled by `src/scripts/navigation.js`, which manipulates CSS `--order` properties to create a 3D stacking/sliding effect.

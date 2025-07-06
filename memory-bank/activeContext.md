@@ -6,7 +6,7 @@ The primary focus is to **refine and enhance the custom navigation system**, whi
 2.  Improving the state management for active sections and navigation UI.
 3.  Optimizing the transition performance.
 
-A secondary focus is **populating placeholder content** in several key sections (`Contact`, `Explanation`, `Unlck-u`, and parts of `Project`).
+A secondary focus is **populating placeholder content** in several key sections (`Contact`, `Unlck-u`, and parts of `Project`).
 
 ## Recent Changes (based on current codebase state)
 - **Navigation Logic Centralized**: The navigation logic, previously in an inline script, has been moved to `src/scripts/navigation.js`.
@@ -22,7 +22,6 @@ A secondary focus is **populating placeholder content** in several key sections 
     *   Ensure correct state management for the active navigation item.
 2.  **Fill Placeholder Content**:
     *   `Contact.astro`
-    *   `Explanation.astro`
     *   `Unlck-u.astro`
     *   Update `Project.astro` descriptions.
 3.  **Address Navigation `data-nav-id`**: Correct the `data-nav-id` for `Credits.astro` and `Unlck-u.astro`.

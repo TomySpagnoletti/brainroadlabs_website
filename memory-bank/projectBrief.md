@@ -25,7 +25,7 @@ The BrainRoad Labs website presents information in distinct sections navigated v
 - **Package Manager**: npm
 
 ## Project Structure
-- Components: `src/components/` (Home, Project, Contact, Explanation, Credits, Unlck-u)
+- Components: `src/components/` (Home, Project, Contact, Credits, Unlck-u)
 - Layouts: `src/layouts/` (Layout.astro)
 - Pages: `src/pages/` (index.astro)
 - Assets: `src/assets/`, `public/`

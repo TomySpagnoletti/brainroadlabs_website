@@ -4,7 +4,6 @@
 
 ### Content Sections (Partially Implemented / Placeholders)
 - 🚧 **Contact**: Structure present, content is placeholder ("XXX").
-- 🚧 **Explanation**: Structure present, content is placeholder ("XXX").
 - 🚧 **Unlck-u**: New section, structure present, content is placeholder ("XXX").
 - 🚧 **Projects**: Review/Correct content. Ensure project descriptions are accurate and not duplicated. Add dates as per TODO.
 
@@ -13,10 +12,10 @@
 - 🔄 **CSS for Vertical Mode Transitions**: Ensure transitions and layouts are optimal in portrait/vertical orientations (mentioned as a TODO in `activeContext.md` previously, still relevant).
 
 ### Content & UI Completion
-- 🔄 **Fill Placeholder Content**: Populate `Contact.astro`, `Explanation.astro`, `Unlck-u.astro` with actual content.
+- 🔄 **Fill Placeholder Content**: Populate `Contact.astro`, `Unlck-u.astro` with actual content.
 - 🔄 **Complete Logo & Splash Screen**: Integrate final logo. The splash screen has been updated to a Lottie animation.
 - 🔄 **Navigation Menu**:
-    - Address potential `data-nav-id` issue for `Credits` and `Unlck-u` sections (both point to `nav-explanation`).
+    - Address potential `data-nav-id` issue for `Credits` and `Unlck-u` sections (both point to the same).
     - Ensure hover effects and active section highlighting are robust.
 
 ### General Polish & Optimization
@@ -30,6 +29,6 @@ The website is in an active development phase. The core navigation system is cen
 
 ## Known Issues / Key TODOs from Code
 - Navigation logic is now in `navigation.js`; further refinement is needed.
-- Placeholder content remains in `Contact`, `Explanation`, `Unlck-u`, and `Project`.
+- Placeholder content remains in `Contact`, `Unlck-u`, and `Project`.
 - The `data-nav-id` for `Credits` and `Unlck-u` needs correction.
 - Various `TODO` comments for cleanup and new features need to be addressed.

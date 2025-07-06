@@ -48,7 +48,7 @@
 - Preview: `npm run preview`
 
 ### Project Structure
-- `src/components/`: Astro components for sections (Home, Project, Contact, Explanation, Credits, Unlck-u).
+- `src/components/`: Astro components for sections (Home, Project, Contact, Credits, Unlck-u).
 - `src/layouts/`: Main layout (`Layout.astro`).
 - `src/pages/`: Astro pages (`index.astro`).
 - `src/assets/`: Static assets (e.g., images, not explicitly seen but typical).

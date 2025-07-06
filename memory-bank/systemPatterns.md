@@ -52,7 +52,6 @@ Layout.astro
 │       ├── HomeComponent
 │       ├── ProjectComponent (generates multiple project views)
 │       ├── ContactComponent
-│       ├── ExplanationComponent
 │       ├── CreditsComponent
 │       └── UnlckUComponent
 └── FloatingNavMenu
@@ -67,5 +66,5 @@ Layout.astro
 
 ## Noteworthy Patterns & TODOs
 - **Centralized Scroll Logic**: The navigation logic has been centralized in `src/scripts/navigation.js`, which is a significant improvement over the previous inline script.
-- **Placeholder Content**: Several components (`Contact`, `Explanation`, `Unlck-u`, parts of `Project`) contain placeholder "XXX" content.
-- **`data-nav-id` Duplication**: `Credits.astro` and `Unlck-u.astro` share the `data-nav-id="nav-explanation"`, which might affect navigation highlighting for these sections.
+- **Placeholder Content**: Several components (`Contact`, `Unlck-u`, parts of `Project`) contain placeholder "XXX" content.
+- **`data-nav-id` Duplication**: `Credits.astro` and `Unlck-u.astro` share the same.
