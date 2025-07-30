@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import logo from '../assets/images/logo_tapered.svg';
 ---
 
-<div class="br_container" data-nav-id="nav-explanation" style="--order: 9;">
+<div class="br_container" data-nav-id="nav-credits" style="--order: 8;">
     <div class="overflow-auto h-full p-5">
         <div class="br_js_header-container flex flex-wrap items-center mb-2">
             <h1 class="br_js_title text-xl">Credits</h1>
@@ -13,29 +13,23 @@ import logo from '../assets/images/logo_tapered.svg';
             </div>
         </div>
         <p>
-            - Framework: <a href="https://astro.build" target="_blank">https://astro.build</a><br />
-            - UI Library: <a href="https://tailwindcss.com" target="_blank">https://tailwindcss.com</a><br />
-            - Icons (with astro-icon): <a href="https://heroicons.com" target="_blank">https://heroicons.com</a><br />
-            - Gradient background: <a href="https://github.com/baunov/gradients-bg" target="_blank">https://github.com/baunov/gradients-bg</a><br />
-            - Co-crafted initially with <strong>Claude Code</strong>, in Italy 🇮🇹 ❤️:<br />
-            <span class="ml-10"></span>• <a href="https://claude.ai/code" target="_blank">https://claude.ai/code</a><br />
-            - Then with <strong>ClineBot</strong>, followed by <strong>Roo Code</strong> and Gemini Models:<br />
-            <span class="ml-10"></span>• <a href="https://cline.bot" target="_blank">https://cline.bot</a><br />
-            <span class="ml-10"></span>• <a href="https://roocode.com" target="_blank">https://roocode.com</a><br />
-            <span class="ml-10"></span>• <a href="https://ai.google.dev/gemini-api/docs/models" target="_blank">https://ai.google.dev/gemini-api/docs/models</a><br />
-            - <em>A base di caffè Americano <strong>decaffeinato</strong>.</em>
+            - Framework: <a href="https://astro.build" target="_blank">Astro</a>
             <br />
+            - UI Library: <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>
             <br />
-            => Check out my GitHub repo:<br />
-            <a href="https://github.com/TomySpagnoletti/brainroadlabs_website" target="_blank">https://github.com/TomySpagnoletti/brainroadlabs_website</a>
+            - Icons (with astro-icon): <a href="https://heroicons.com" target="_blank">Heroicons</a>
             <br />
+            - Gradient background: <a href="https://github.com/baunov/gradients-bg" target="_blank">baunov/gradients-bg</a>
             <br />
-            <div class="flex justify-center mt-4">
-                <Image class="zoomable-image" src={logo} alt="BrainRoad Labs Logo" style="width: 150px;" />
+            => <strong>My GitHub repo:</strong> <a href="https://github.com/TomySpagnoletti/brainroadlabs_website" target="_blank">TomySpagnoletti/brainroadlabs_website</a>
+            <div class="flex justify-center mt-8">
+                <Image class="zoomable-image" src={logo} alt="BrainRoad Labs Logo" style="width: 150px;" loading="lazy" />
             </div>
-            <br />
-            <br />
-            <a href="#" class="open-debug-graph">Open Debug Graph</a>
+            <p class="text-center mt-8">
+                <strong><em>Crafted in Italy ❤️, con caffè Americano decaffeinato.</em></strong>
+                <br />
+                <a href="#" class="open-debug-graph">Open the Debug Graph</a>
+            </p>
         </p>
     </div>
 </div>

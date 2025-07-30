@@ -86,7 +86,7 @@ export function initResize() {
     if (isClickOnHandle) {
       const rootStyle = document.documentElement.style;
       const currentHeight = parseInt(rootStyle.getPropertyValue('--container-portrait') || MIN_HEIGHT);
-      const targetHeight = currentHeight < MAX_HEIGHT ? MAX_HEIGHT : MIN_HEIGHT;
+      const targetHeight = currentHeight > MIN_HEIGHT ? MIN_HEIGHT : MAX_HEIGHT;
       
       const allContainers = document.querySelectorAll('.br_container');
       allContainers.forEach(c => c.classList.add('br_container--animated-resize'));

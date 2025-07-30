@@ -314,15 +314,16 @@ export function initNavigation() {
     const HORIZONTAL_PIXELS_PER_POINT = 4;
     const MAX_DATA_POINTS = 300;
 
+    // --- Gesture Analysis Constants ---
+    const GESTURE_END_THRESHOLD = 0.1; // Below this smoothed value, the gesture is considered ended.
+    const GESTURE_START_FROM_STANDSTILL_THRESHOLD = 0.5; // Min smoothed value to start a gesture from idle.
+
     // --- Graph-specific State ---
     const dataPoints = [];
-    let isSmoothedAccelerationPhaseActive = false;
-    let isSmoothedDecelerationPhaseActive = false;
-    let trendScrollLock = false; // Lock to ensure one scroll action per gesture
-    let lastGestureDirection = 0; // Stores the direction of the currently locked gesture
+    let gesturePhase = 'idle'; // 'idle', 'active', 'ending'
     let currentGestureAction = "none"; // Can be 'none', 'navigate', or 'scroll-internal'
     let currentGestureTargetElement = null; // The scrollable element for the current gesture
-    let trendScrollLockTimeout = null; // Timeout to prevent a permanently stuck lock
+    let gestureResetTimeout = null; // Timeout to reset the gesture state
 
     /**
      * Utility to create and style a DOM element.
@@ -439,97 +440,62 @@ export function initNavigation() {
             ) / afterEvents.length;
 
           // Check for significant INCREASE (start of scroll gesture)
-          if (avgAfter > avgBefore * (1 + TREND_SIGNIFICANCE_THRESHOLD_RATIO)) {
-            const newGestureDirection = Math.sign(pointToAnalyze.deltaY);
+          const isStandstill = avgBefore < GESTURE_END_THRESHOLD;
+          const isSignificantRelativeChange = avgAfter > avgBefore * (1 + TREND_SIGNIFICANCE_THRESHOLD_RATIO);
 
-            // If a new gesture starts in the opposite direction, force-end the previous one.
-            if (
-              trendScrollLock &&
-              newGestureDirection !== 0 &&
-              newGestureDirection !== lastGestureDirection
-            ) {
-              clearTimeout(trendScrollLockTimeout);
-              trendScrollLock = false;
-              isSmoothedAccelerationPhaseActive = false; // Allow reprocessing as a new gesture
+          if ((gesturePhase === 'idle' || gesturePhase === 'ending') && (isStandstill ? avgAfter > GESTURE_START_FROM_STANDSTILL_THRESHOLD : isSignificantRelativeChange)) {
+            const trendStartPoint = afterEvents[0];
+            trendStartPoint.flags.isSmoothedSignificantIncrease = true;
+            gesturePhase = 'active';
+
+            const scrollDirection = Math.sign(trendStartPoint.deltaY);
+            currentGestureTargetElement = getScrollableParent(trendStartPoint.target);
+
+            if (currentGestureTargetElement) {
+              const wasAtTop = currentGestureTargetElement.scrollTop === 0;
+              const maxScrollTop = currentGestureTargetElement.scrollHeight - currentGestureTargetElement.clientHeight;
+              const wasAtBottom = currentGestureTargetElement.scrollTop >= maxScrollTop - 1;
+              const isScrollingUp = scrollDirection < 0;
+              const isScrollingDown = scrollDirection > 0;
+
+              if ((isScrollingUp && !wasAtTop) || (isScrollingDown && !wasAtBottom)) {
+                currentGestureAction = "scroll-internal";
+              } else {
+                currentGestureAction = "navigate";
+              }
+            } else {
+              currentGestureAction = "navigate";
             }
 
-            if (!isSmoothedAccelerationPhaseActive) {
-              pointToAnalyze.flags.isSmoothedSignificantIncrease = true;
-              isSmoothedAccelerationPhaseActive = true;
-              isSmoothedDecelerationPhaseActive = false;
-
-              // A gesture is detected. Lock it and decide what action to take for its entire duration.
-              if (!trendScrollLock) {
-                const scrollDirection = newGestureDirection;
-                lastGestureDirection = scrollDirection; // Store direction for the new lock
-
-                currentGestureTargetElement = getScrollableParent(
-                  pointToAnalyze.target
-                );
-
-                // Check if the gesture starts over a scrollable element and if it's at an edge.
-                if (currentGestureTargetElement) {
-                  const wasAtTop = currentGestureTargetElement.scrollTop === 0;
-                  const maxScrollTop =
-                    currentGestureTargetElement.scrollHeight -
-                    currentGestureTargetElement.clientHeight;
-                  const wasAtBottom =
-                    currentGestureTargetElement.scrollTop >= maxScrollTop - 1;
-                  const isScrollingUp = scrollDirection < 0;
-                  const isScrollingDown = scrollDirection > 0;
-
-                  // If scrolling into a container that is not at an edge, this gesture is for internal scroll.
-                  if (
-                    (isScrollingUp && !wasAtTop) ||
-                    (isScrollingDown && !wasAtBottom)
-                  ) {
-                    currentGestureAction = "scroll-internal";
-                  } else {
-                    // Otherwise, the gesture is for page navigation.
-                    currentGestureAction = "navigate";
-                  }
-                } else {
-                  // Not over a scrollable element, so it's always a page navigation gesture.
-                  currentGestureAction = "navigate";
-                }
-
-                // If the decided action is navigation, trigger it once at the start of the gesture.
-                if (currentGestureAction === "navigate") {
-                  if (scrollDirection < 0) {
-                    updateAllContainersOrder("increment");
-                  } else {
-                    updateAllContainersOrder("decrement");
-                  }
-                }
-
-                // Lock this gesture to prevent conflicting actions until it ends.
-                trendScrollLock = true;
-                clearTimeout(trendScrollLockTimeout);
-                trendScrollLockTimeout = setTimeout(() => {
-                  trendScrollLock = false;
-                  currentGestureAction = "none";
-                  currentGestureTargetElement = null;
-                  lastGestureDirection = 0; // Reset on timeout
-                }, 500);
+            if (currentGestureAction === "navigate") {
+              if (scrollDirection < 0) {
+                updateAllContainersOrder("increment");
+              } else {
+                updateAllContainersOrder("decrement");
               }
             }
-            // Check for significant DECREASE (end of scroll gesture)
-          } else if (
-            avgAfter <
-            avgBefore * (1 - TREND_SIGNIFICANCE_THRESHOLD_RATIO)
-          ) {
-            if (!isSmoothedDecelerationPhaseActive) {
-              pointToAnalyze.flags.isSmoothedSignificantDecrease = true;
-              isSmoothedDecelerationPhaseActive = true;
-              isSmoothedAccelerationPhaseActive = false;
 
-              // A deceleration marks the end of the gesture. Unlock for the next one.
-              clearTimeout(trendScrollLockTimeout);
-              trendScrollLock = false;
-              currentGestureAction = "none";
+            // Set a timeout to reset the gesture if it gets stuck
+            clearTimeout(gestureResetTimeout);
+            gestureResetTimeout = setTimeout(() => {
+              gesturePhase = 'idle';
+              currentGestureAction = 'none';
               currentGestureTargetElement = null;
-              lastGestureDirection = 0; // Reset on deceleration
-            }
+            }, 500);
+
+          // Check for significant DECREASE (end of scroll gesture)
+          } else if (gesturePhase === 'active' && avgAfter < avgBefore * (1 - TREND_SIGNIFICANCE_THRESHOLD_RATIO)) {
+            const trendEndPoint = afterEvents[0];
+            trendEndPoint.flags.isSmoothedSignificantDecrease = true;
+            gesturePhase = 'ending'; // Move to 'ending' phase, wait for idle to reset
+            // The main gestureResetTimeout continues to act as a safety net
+
+          // Check if the gesture has fully ended and reset the state instantly
+          } else if (gesturePhase === 'ending' && avgAfter < GESTURE_END_THRESHOLD) {
+            clearTimeout(gestureResetTimeout); // The gesture ended cleanly, so we can clear the safety net
+            gesturePhase = 'idle';
+            currentGestureAction = 'none';
+            currentGestureTargetElement = null;
           }
         }
         pointToAnalyze.processedForSmoothedTrend = true;

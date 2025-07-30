@@ -1,40 +1,129 @@
 ---
+import { Image } from 'astro:assets';
+import betsyProjImage from '../assets/images/project_tn/betsy-in-progress.png';
+
+const labelColors = [
+  { border: 'border-sky-400', text: 'text-sky-400' },
+  { border: 'border-amber-400', text: 'text-amber-400' },
+  { border: 'border-emerald-400', text: 'text-emerald-400' },
+  { border: 'border-indigo-400', text: 'text-indigo-400' },
+  { border: 'border-rose-400', text: 'text-rose-400' },
+  { border: 'border-fuchsia-400', text: 'text-fuchsia-400' },
+  { border: 'border-violet-400', text: 'text-violet-400' },
+  { border: 'border-teal-400', text: 'text-teal-400' },
+  { border: 'border-cyan-400', text: 'text-cyan-400' },
+  { border: 'border-lime-400', text: 'text-lime-400' },
+  { border: 'border-orange-400', text: 'text-orange-400' },
+  { border: 'border-pink-400', text: 'text-pink-400' }
+];
+
+// Fisher-Yates shuffle function
+const shuffleArray = (array: { border: string; text: string }[]) => {
+  let currentIndex = array.length, randomIndex;
+  const newArray = [...array]; // Create a copy
+
+  // While there remain elements to shuffle.
+  while (currentIndex !== 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [newArray[currentIndex], newArray[randomIndex]] = [
+      newArray[randomIndex], newArray[currentIndex]];
+  }
+
+  return newArray;
+};
+
 const projects = [
   {
     order: 2,
-    title: "Jean Paul Gaultier",
-    status: "Client Hold",
-    badgeClass: "br_badge_orange",
-    description: "BrainRoad Labs builds modern, reliable, scalable web & mobile applications.<br />We <strong>blend</strong> AI, blockchain, classic and proven tech stacks into seamless, high-performance systems.<br /><br />Our code runs for brands like Jean Paul Gaultier, was featured in the <a href=\"https://www.ces.tech/articles/2023/february/ces-2023-spotlights-tech-for-good/\" target=\"_blank\">CES 2023 \"Tech for Good\" Spotlight</a>, and drives tools that have run for 10+ years without downtime.<br /><br />BrainRoad Labs is where <strong>experimentation</strong> meets <strong>engineering</strong>."
+    title: "BrainRoad Labs Website",
+    labels: ['Astro', 'Tailwind', 'Custom Scroll', 'Inertia Analysis', 'Responsive', 'UI/UX'],
+    date: "2025",
+    status: "Active",
+    badgeClass: "br_badge_green",
+    description: "The site you're on. The main challenge was creating a 'homemade' scroll engine that feels fluid and intuitive. This required a custom inertia analysis system specifically designed to tame the complex scroll physics of Apple's mouses and trackpads, distinguishing between intentional page navigation and internal content scrolling.<br/><br/>The result is a perfectly responsive design with a polished UX, all built from the ground up. <a href='#' class='open-debug-graph underline'>Open the debug graph</a> to see the engine in action.",
+    images: [],
+    skills: [
+      "Built a <strong>custom scroll engine</strong> using inertia trend detection to trigger page transitions only on intentional gestures.",
+      "Developed a <strong>dynamic CSS system</strong> using <em>--order</em> and other custom properties to control 3D transforms and scroll-based animations.",
+      "Tuned <strong>CSS-only animations and transforms</strong> for smooth, hardware-accelerated UI transitions.",
+      "Used <strong>Vercel</strong> for deployment and preview workflows, alongside existing experience with Heroku, AWS Amplify and many others..."
+    ]
   },
   {
     order: 3,
-    title: "CES 2023 Health App",
-    status: "Completed",
-    badgeClass: "br_badge_green",
-    description: "Healthcare monitoring application featured in CES 2023 'Tech for Good' spotlight. Provides accessible healthcare solutions for underserved communities. Built with Flutter, Firebase and AI-powered diagnostics."
+    title: "BETSY - Built to Elevate, Train & Speak with You",
+    labels: ['AI', 'Next.js', 'Python', 'LiveKit', 'Real-time Voice Agent'],
+    date: "2025",
+    status: "In Progress",
+    badgeClass: "br_badge_blue",
+    description: "BETSY is an <strong>in-development</strong> AI-powered virtual teacher designed to act like a real language instructor — speaking fluidly, writing different content, and offering visual exercises in real time. The goal: bring human-like pedagogy to conversational AI.",
+    images: [
+      { src: betsyProjImage, alt: "Screenshot of BETSY AI teacher interface" }
+    ],
+    skills: [
+      "Implemented <strong>LiveKit</strong> for real-time communication on both client (Next.js) and server (Python) sides.",
+      "Orchestrated an AI agent's behavior (OpenAI GPT-4o Realtime) through a <strong>FastAPI backend</strong>, enabling fine-grained control from the Next.js front-end.",
+      "Designed a system to generate <strong>written content</strong> that is distinct from the spoken transcript, enriching the user interaction.",
+      "Designed the dynamic, real-time display of exercises, triggered and controlled by the AI agent."
+    ]
   },
   {
     order: 4,
-    title: "Enterprise Monitoring 1",
-    status: "Active",
-    badgeClass: "br_badge_green",
-    description: "Mission-critical monitoring system with 10+ years of continuous uptime. Provides real-time analytics and alerts for enterprise infrastructure. Built with Go, Kubernetes, and high-availability design principles."
+    title: "Do You Speak Gaultier – Jean Paul Gaultier",
+    labels: ['AI', 'ComfyUI', 'SDXL', 'LORAs', 'Custom Navigation'],
+    date: "2024",
+    status: "Client Hold",
+    badgeClass: "br_badge_orange",
+    description: "XXX",
+    images: [
+      { src: betsyProjImage, alt: "XXX" }
+    ],
+    skills: [
+      "",
+      "",
+      ""
+    ]
   },
   {
     order: 5,
-    title: "Enterprise Monitoring 2",
+    title: "Ko Social Network & Shaaare",
+    labels: ['X', 'X', 'X', 'X'],
+    date: "2025-2025",
     status: "Active",
     badgeClass: "br_badge_green",
-    description: "Mission-critical monitoring system with 10+ years of continuous uptime. Provides real-time analytics and alerts for enterprise infrastructure. Built with Go, Kubernetes, and high-availability design principles."
+    description: "XXX",
+    images: [
+      { src: betsyProjImage, alt: "XXX" }
+    ],
+    skills: [
+      "",
+      "",
+      ""
+    ]
   },
   {
     order: 6,
-    title: "Enterprise Monitoring 3",
+    title: "IK-Generator",
+    labels: ['X', 'X', 'X', 'X'],
+    date: "2025-2025",
     status: "Active",
     badgeClass: "br_badge_green",
-    description: "Mission-critical monitoring system with 10+ years of continuous uptime. Provides real-time analytics and alerts for enterprise infrastructure. Built with Go, Kubernetes, and high-availability design principles."
+    description: "XXX",
+    images: [
+      { src: betsyProjImage, alt: "XXX" }
+    ],
+    skills: [
+      "",
+      "",
+      ""
+    ]
   }
+  /* AJOUTER the others HERE en position 7, changer Contact */
+  /* AJOUTER Workshops AI Essity + Webstart aussi */
 ];
 ---
 
@@ -42,20 +131,54 @@ const projects = [
   <div class="br_container" data-nav-id="nav-projects" style={`--order: ${project.order};`}>
     <div class="overflow-auto h-full p-5">
       <div class="br_js_header-container flex flex-wrap items-center mb-2">
-        <h1 class="br_js_title text-xl">Project: {project.title}</h1>
+        <h1 class="br_js_title text-xl">Project: {project.title}<span class="text-sm text-gray-500 ml-2 my-0">{project.date}</span></h1>
         <div class="br_js_badge br_badge ml-auto">
           <div class={project.badgeClass}></div>
           {project.status}
         </div>
       </div>
+
+      {project.labels && project.labels.length > 0 && (() => {
+        const shuffledColors = shuffleArray(labelColors);
+        return (
+          <div class="flex flex-wrap gap-2 mt-2 mb-4">
+            {project.labels.map((label, index) => {
+              const color = shuffledColors[index % shuffledColors.length];
+              return (
+                <span class:list={[
+                  "text-xs px-2.5 py-0.5 rounded-full border-1 border-solid bg-transparent",
+                  color.border,
+                  color.text
+                ]}>
+                  {label}
+                </span>
+              )
+            })}
+          </div>
+        );
+      })()}
+
       <p set:html={project.description}></p>
+
+      {project.images && project.images.length > 0 && (
+        <div class="flex justify-center flex-wrap gap-4 mt-6">
+          {project.images.map(image => (
+            <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={image.src} alt={image.alt} style="width: 200px;" loading="lazy" />
+          ))}
+        </div>
+      )}
+
+      {project.skills && project.skills.length > 0 && (
+        <div class="mt-6">
+          <h2 class="text-lg font-semibold mb-3">Relevant to Future Opportunities:</h2>
+          <ul class="list-disc list-inside space-y-1 pl-2">
+            {project.skills.map(skill => (
+              <li set:html={skill}></li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
     </div>
   </div>
 ))}
-
-<!--
-
-  TODO: Il me faut une date
-  TODO: Remplir correctement
-
--->
