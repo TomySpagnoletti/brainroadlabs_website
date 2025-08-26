@@ -1,0 +1,219 @@
+---
+import { Image } from 'astro:assets';
+
+import dysgBackOffice from '../assets/images/experience_tns/dysg-back-office.jpg';
+import dysgBeforeToRecord from '../assets/images/experience_tns/dysg-before-to-record.jpg';
+import dysgFromJpgWebsite from '../assets/images/experience_tns/dysg-from-jpg-website.jpg';
+import dysgHome from '../assets/images/experience_tns/dysg-home.jpg';
+import dysgRecording from '../assets/images/experience_tns/dysg-recording.jpg';
+import dysgSentenceChoice from '../assets/images/experience_tns/dysg-sentence-choice.jpg';
+import dysgWall1 from '../assets/images/experience_tns/dysg-wall-1.jpg';
+import dysgWall2 from '../assets/images/experience_tns/dysg-wall-2.jpg';
+import dysgWfComfyui1 from '../assets/images/experience_tns/dysg-wf-comfyui-1.jpg';
+import dysgWfComfyui2 from '../assets/images/experience_tns/dysg-wf-comfyui-2.jpg';
+import dysgWfComfyui3 from '../assets/images/experience_tns/dysg-wf-comfyui-3.jpg';
+import dysgWfComfyui4 from '../assets/images/experience_tns/dysg-wf-comfyui-4.jpg';
+import dysgResultVideo from '../assets/images/experience_tns/dysg-result-video.webm';
+
+import koApp1 from '../assets/images/experience_tns/ko-social-network-appstore-1.jpg';
+import koApp2 from '../assets/images/experience_tns/ko-social-network-appstore-2.jpg';
+import koApp3 from '../assets/images/experience_tns/ko-social-network-appstore-3.jpg';
+import koApp4 from '../assets/images/experience_tns/ko-social-network-appstore-4.jpg';
+import koApp5 from '../assets/images/experience_tns/ko-social-network-appstore-5.jpg';
+import koApp6 from '../assets/images/experience_tns/ko-social-network-appstore-6.jpg';
+import koApp7 from '../assets/images/experience_tns/ko-social-network-appstore-7.jpg';
+---
+
+<div class="br_container" data-nav-id="nav-xp" style="--order: 2;">
+    <div class="overflow-auto h-full p-5">
+        <div class="br_js_header-container flex flex-wrap items-center mb-2">
+            <h1 class="br_js_title text-xl">Experience</h1>
+            <div class="br_js_badge br_badge ml-auto">
+                <div class="br_badge_green"></div>
+                #ProductMindedCTO
+            </div>
+        </div>
+        <p>
+            <h1 class="text-xl">• Today – BrainRoad Labs Website</h1>
+            <h3 class="text-gray-400!">Summer '25</h3>
+            <p>
+                Built the BrainRoad Labs website from scratch, designing a <strong>custom scroll engine with inertia analysis</strong> to ensure smooth, intuitive navigation — especially on Apple devices <em>(less optimal with traditional mouse scrolling)</em> — and delivering a <strong>fully responsive</strong>, high-performance UI/UX.
+            </p>
+
+            <h1 class="text-xl mt-4">• Founder & Full-Stack Dev – Betsy</h1>
+            <h3 class="text-gray-400!">May 2025 - In Progress...</h3>
+            <p>
+                Currently building BETSY, an <strong>AI-powered virtual language teacher</strong> that speaks in real time using GPT-4o and LiveKit — designed to feel like a real instructor, with <strong>upcoming support for written content and interactive exercises</strong>.
+            </p>
+
+            <h1 class="text-xl mt-4">• Full-Stack Dev – CheckAI</h1>
+            <h3 class="text-gray-400!">April 2025</h3>
+            <p>
+                Engineered CheckAI, a proof-of-concept <strong>change detection tool</strong> using the “The Change You Want to See” co-attention model (WACV 2023) to automate <strong>before/after image comparison for short-term rentals</strong>. I integrated the full inference pipeline via Flask and served a responsive UI with bounding-box overlays.<br />
+                To meet hardware constraints, I adapted the training and inference flow to run <strong>entirely on CPU</strong> — including Apple Silicon — by bypassing CUDA dependencies, optimizing model loading, and tweaking detection thresholds and visualizations.<br />
+                The result: on-demand visual diffing with pixel-accurate masks and <strong>seamless UX on low-cost infrastructure</strong>.
+            </p>
+            
+            <h1 class="text-xl mt-4">• Founder & Full-Stack Dev – <a href="https://www.ik-generator.com" target="_blank">IK-Generator v2</a></h1>
+            <h3 class="text-gray-400!">February-March 2025</h3>
+            <p>
+                Rebuilt IK-Generator (v2) App, nine years after developing its first version. Migrated a monolithic Symfony app with MySQL, Elasticsearch, and OSRM — previously installed bare-metal — into a <strong>fully containerized architecture using Docker and Docker Compose</strong>.<br />
+                Implemented <strong>secure server automation</strong> (Debian hardening, SSH lockdown, firewall, fail2ban...), streamlined data pipelines for database imports and ES population, and created <strong>scripted deployment flows</strong> for both dev and prod environments on Scaleway.
+            </p>
+
+            <h1 class="text-xl mt-4">• Lead Dev – DoYouSpeakGaultier? <em>[JPG's GenAI experience]</em></h1>
+            <h3 class="text-gray-400!">June-September 2024 (4-month build)</h3>
+            <p>
+                <h3>Summary.</h3>
+                Built the end-to-end <strong>GenAI experience for JPG's ecommerce site</strong>: users pick a Parisian phrase (available in 7 languages), record a short mouth clip, and the system isolates, beautifies, and composites the lips onto AI-generated skies, publishing brand-safe videos to a live <strong>“wall of mouths”</strong>.<br />At each key step, Xano orchestrated the flow and sent transactional emails via SendGrid to keep users informed.<br />
+                <h3 class="mt-2">Role & scope</h3>
+                • Lead engineer (me): front-end JavaScript, back-end, <strong>GenAI/ML pipeline (ComfyUI)</strong>, DevOps, and moderation tooling.<br />
+                • Team: UX/UI designer + one front collaborator; I owned the pipeline, infra, and all of the app logic.<br />
+                <h3 class="mt-2">Stack</h3>
+                • GenAI / ML: ComfyUI with custom SDXL model, custom LoRA(s) for lipstick styling (trained on synthetic dataset, <a href="https://civitai.com/user/TomySpagnoletti" target="_blank">released on CivitAI</a>), AnimateDiff for <strong>frame-to-frame consistency</strong>, SAM + Grounding DINO for segmentation/detection, ControlNet, CLIP (pos/neg), KSampler, FILM VFI for interpolation, VAE, video combine...<br />
+                • Infra: <strong>AWS</strong> EC2 (ComfyUI in Docker), S3 for input/output storage.<br />
+                • Backend: Xano (job orchestration, APIs, DB in <strong>Postgres</strong>, callback handling, SendGrid integration).<br />
+                • Front: vanilla JavaScript experience embedded in JPG's site; mobile & desktop camera capture.<br />
+                • Content: backgrounds via Midjourney, JPG's voiceover via ElevenLabs.<br />
+                • Admin: <strong>custom Vue.js back-office</strong> for moderation and wall management.<br />
+                <h3 class="mt-2">ComfyUI Workflow</h3>
+                <strong>1.</strong> Fetch video from S3 → drop 1 frame out of 2 to reduce RAM, since one user video produced 3 outputs (HD+FHD landscape for the site, and FHD portrait for social).<br />
+                <strong>2.</strong> Generate new video via KSampler with prompts (pos/neg), ControlNets, the source video, and AnimateDiff to enforce temporal consistency.<br />
+                <strong>3.</strong> Mask/detour the new video.<br />
+                <strong>4.</strong> In parallel, generate a second “lipstick-only” red-lips video, used as a guiding mask to help SAM + Grounding DINO perform more accurate segmentation.<br />
+                <strong>5.</strong> Apply this mask to the main custom video.<br />
+                <strong>6.</strong> Upscale useful frames from 1024x576 to HD and FHD variants.<br />
+                <strong>7.</strong> Composite lips onto AI skies.<br />
+                <strong>8.</strong> FILM VFI interpolation → 60 fps for smoothness.<br />
+                <strong>9.</strong> Mix original audio back into the final render.<br />
+                <strong>10.</strong> Push 3 new videos (HD, FHD, social) to S3 + Postgres/Xano, triggering callbacks and user notifications via SendGrid.<br />
+                <h3 class="mt-2">Engineering highlights</h3>
+                • Designed a <strong>multi-branch ComfyUI pipeline</strong> combining AnimateDiff, ControlNets, segmentation feedback loops (red-lips masking) and more.<br />
+                • Balanced RAM + GPU limits by <strong>frame-sampling + smart upscale</strong>, while still hitting <strong>high-res deliverables</strong> (example below).<br />
+                • Automated 7-language UX with transactional emails for transparency (recorded → processing → published).<br />
+                • Built a moderation back-office (Vue.js) with review queues, “On the Wall” toggles, and safe-publish controls.<br />
+                • <strong>Containerized inference on EC2</strong> for reproducibility and scale.<br />
+                <h3 class="mt-2">Result</h3>
+                A visually striking, multilingual UGC experience that transforms <strong>noisy webcam clips into branded AI videos</strong>, manages moderation, and delights users with live publication on the “wall of mouths”.
+                <h3 class="mt-2">Screenshots</h3>
+                <div class="flex justify-center flex-wrap gap-4 mt-2">
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgFromJpgWebsite} alt="DYSG - From JPG Website" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgHome} alt="DYSG - Home" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgSentenceChoice} alt="DYSG - Sentence Choice" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgBeforeToRecord} alt="DYSG - Before to record" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgRecording} alt="DYSG - Recording" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgWall1} alt="DYSG - Wall 1" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgWall2} alt="DYSG - Wall 2" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgWfComfyui1} alt="DYSG - ComfyUI Workflow 1" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgWfComfyui2} alt="DYSG - ComfyUI Workflow 2" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgWfComfyui3} alt="DYSG - ComfyUI Workflow 3" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgWfComfyui4} alt="DYSG - ComfyUI Workflow 4" style="width: 200px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={dysgBackOffice} alt="DYSG - Back-office" style="width: 200px;" loading="lazy" />
+                </div>
+                <h3 class="mt-4">Live Generation Example</h3>
+                <div class="flex justify-center mt-2">
+                    <video class="rounded-md border-1 border-gray-500 border-solid" src={dysgResultVideo} playsinline controls style="width: 100%; max-width: 600px;"></video>
+                </div>
+            </p>
+        
+            <h1 class="text-xl mt-8">• CEO / CTO / Product Owner – Shaaare App</h1>
+            <h3 class="text-gray-400!">September '23 – April '25</h3>
+            <p>
+                • Pivot from Ko Social Network to focus on AI-powered content monetization.<br />
+                • Developed <strong>Shaaare</strong>, a social network where photo & video posts were automatically evaluated by <strong>GPT-4o</strong>, rewarding creators in <strong>XKO tokens</strong> (25–100 XKO per post) directly on blockchain.<br />
+                • Implemented anti-spam measures (3–5 posts/day limit, verified users) and automatic rejection of low-quality content (score ≤ 25).<br />
+                • Built and released three full versions, published on <strong>Google Play Store</strong>, blocked on <strong>Apple App Store</strong> due to in-app crypto monetization rules.<br />
+                • Achieved <strong>JEI (Jeune Entreprise Innovante)</strong> status in France.<br />
+                • Raised nearly <strong>€1M</strong> from <strong>100+ investors</strong> across both Ko & Shaaare projects.<br />
+                <h3 class="mt-2">Resources:</h3>
+                &nbsp;&nbsp;&nbsp;– <a href="https://www.youtube.com/watch?v=5-ujPKEruuI" target="_blank">Presentation Video</a><br />
+                &nbsp;&nbsp;&nbsp;– <a href="https://shapeofyourdesign.dev/" target="_blank">Designer’s Page (screenshots)</a><br />
+                &nbsp;&nbsp;&nbsp;– <a href="https://shaaa-re.webflow.io/" target="_blank">Archived Website & Whitepaper</a>
+            </p>
+
+            <h1 class="text-xl mt-4">• CEO / CTO / Product Owner – Ko Social Network <em>[Featured at CES '23]</em></h1>
+            <h3 class="text-gray-400!">April '20 – September '23</h3>
+            <p>
+                Built and led a <strong>Web3 social network</strong> with a team of front-end and back-end developers, UI/UX designers, and a marketing squad. The project aimed to give content ownership back to users through <strong>NFT-based posts</strong> and a <strong>native cryptocurrency (XKO)</strong>.<br />
+                • <strong>Decentralized Ownership</strong>: Users could mint <strong>photo and video NFTs</strong> directly from their devices and manage them via a <strong>non-custodial in-app wallet</strong>.<br />
+                • <strong>Seamless UX + Security</strong>: Implemented <strong>ERC-20 meta-transactions on Polygon and Ethereum</strong>, enabling gasless transactions with transparent signature handling.<br />
+                • <strong>Native Token Economy</strong>: Designed <strong>Like+Ko</strong> (tip-based likes with customizable XKO amounts) and <strong>Pay-to-View</strong> content monetization.<br />
+                • <strong>Crypto Features</strong>: Enabled peer-to-peer XKO transfers and NFT minting with frictionless mobile experience.<br />
+                • <strong>Recognition</strong>: Invited to <strong>CES 2023</strong> with a <a href="https://www.ces.tech/articles/2023/february/ces-2023-spotlights-tech-for-good/#:~:text=Regarding%20Web3%2C%20the,special%20skills%20required." target="_blank">"Spotlight Tech for Good" mention</a>, leading to high-level discussions with <a href="https://www.linkedin.com/in/jholcombe/" target="_blank">Jamie Holcombe (USPTO CIO)</a>.<br />
+                • <strong>Social App Experience</strong>: Positioned as a blend of <strong>TikTok + Instagram</strong>, with support for text, audio, photo, and video posts — NFTs reserved for photo/video content.<br />
+                Despite full feature completion and completion of many versions, <strong>Apple Store in-app monetization restrictions</strong> and fundraising challenges in France led to the project pivoting into <strong>Shaaare</strong>.
+                <h3 class="mt-2">Latest Stores Screenshots</h3>
+                <div class="flex justify-center flex-wrap gap-4 mt-2">
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp1} alt="Ko Social Network Screenshot 1" style="width: 50px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp2} alt="Ko Social Network Screenshot 2" style="width: 50px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp3} alt="Ko Social Network Screenshot 3" style="width: 50px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp4} alt="Ko Social Network Screenshot 4" style="width: 50px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp5} alt="Ko Social Network Screenshot 5" style="width: 50px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp6} alt="Ko Social Network Screenshot 6" style="width: 50px;" loading="lazy" />
+                    <Image class="zoomable-image rounded-md border-1 border-gray-500 border-solid" src={koApp7} alt="Ko Social Network Screenshot 7" style="width: 50px;" loading="lazy" />
+                </div>
+            </p>
+
+            <h1 class="text-xl mt-8">• Lead Dev – Customer's Projects</h1>
+            <h3 class="text-gray-400!">August '19 – June '20</h3>
+            <p>
+                • <strong>TSI (Tout Sauf l’Isolation)</strong>: Developed a nationwide ERP in <strong>FileMaker</strong> to manage insulation work projects, fully compliant with <strong>ADEME’s regulatory requirements</strong>.<br />
+                • <strong>LiveCoworking</strong>: Built a web platform enabling restaurants to convert unused space into coworking areas during off-service hours, designed with a <strong>European expansion</strong> in mind. Activity halted due to COVID.<br />
+                • <strong>LiveCo.</strong>: Created a real-time <strong>Mapbox + Jitsi</strong> application where users could generate and join video-conference rooms directly on a shared map — fostering spontaneous collaboration and discussion during the pandemic.
+            </p>
+
+            <h1 class="text-xl mt-4">• Lead Trainer – Webstart Paris</h1>
+            <h3 class="text-gray-400!">October '17 – January '20</h3>
+            <p>
+                • Served as <strong>principal instructor and training manager</strong> for a three-year Web & Mobile Development program at Webstart Paris, a hands-on digital school in central Paris <strong>focused on practical and innovative pedagogy</strong>.<br />
+                • Oversaw three cohorts (Dev 1, Dev 2, Dev 3), <strong>managed the full curriculum and coordinated the teaching team</strong>, including specialists in C/C#, back-end development, and UX/UI design.<br />
+                • Personally delivered general technology foundation and front-end development courses—HTML, CSS, and JavaScript—to aspiring developers over two and a half years.<br />
+                • <strong>Fostered a collaborative learning environment</strong>, driving both technical mastery and soft skills within a practice-oriented educational culture.
+            </p>
+
+            <h1 class="text-xl mt-4">• Founder & Full-Stack Dev – <a href="https://www.ik-generator.com" target="_blank">IK-Generator v1</a></h1>
+            <h3 class="text-gray-400!">2016–2024</h3>
+            <p>
+                Developed and scaled a SaaS platform for calculating and managing French mileage allowances (Indemnités Kilométriques), later handed over to my partner.<br />
+                • <strong>Unique core feature:</strong> generated mileage allowance tables directly from a chosen starting address and a target reimbursement amount — a one-of-a-kind solution in France.<br />
+                • Built with <strong>Symfony 2, MySQL (17M+ French addresses), ElasticSearch, OSRM</strong>...<br />
+                • Implemented full-text search with autocomplete, high-performance routing engine, and tax/legal document generation.<br />
+                • Installed monolithically on a dedicated server with hardened security (firewall, fail2ban, SSL...).<br />
+                • Integrated <strong>Stripe payments, transactional emails with POSTFIX, and user management</strong>.<br />
+                • Served thousands of users with fast, reliable calculations and record-keeping.
+            </p>
+
+            <h1 class="text-xl mt-4">• Founder & Lead Dev – Ély</h1>
+            <h3 class="text-gray-400!">2014–2015</h3>
+            <p>
+                Built a SaaS platform to manage queues and reservations for restaurants and public venues using <strong>Laravel, jQuery & Bootstrap</strong>.<br />
+                • Enabled customers to join a <strong>virtual waiting line</strong> with their phone number.<br />
+                • Provided businesses with tools to <strong>collect client contacts</strong> and send <strong>SMS notifications</strong> (opt-in).<br />
+                • Integrated <strong>Stripe payments</strong> and a full SMS workflow.<br />
+                • Fully developed and launched with a first client, but activity was discontinued due to lack of funding.
+            </p>
+
+            <h1 class="text-xl mt-4">• Previously Founded Companies</h1>
+            <h3 class="text-gray-400!">January '09 – September '17</h3>
+            <p>
+                • Ran my own freelance business and founded 3 more companies in Toulouse (France), delivering IT and web solutions to <strong>1,500+ clients</strong> (SMBs and individuals).<br />
+                • <strong>Cestan Groupe Numérique (5 years):</strong> Web development (Symfony, Laravel, PHP...), FileMaker, and IT support. Built, among others, a <strong>large e-commerce platform</strong> with ERP integration for grocery delivery, and a <strong>social/dating website</strong> still active today with <strong>50,000+ users</strong>.<br />
+                • <strong>Handy (1 year, sold):</strong> Mac/PC, smartphone & tablet repair services.<br />
+                • <strong>The Digital Smartness (2 years):</strong> Focused on advanced web technologies and FileMaker development (no more hardware).
+            </p>
+
+            <h1 class="text-xl mt-4">• Salaried Roles in IT</h1>
+            <h3 class="text-gray-400!">September '07 – January '09</h3>
+            <p>
+                • <strong>Airbus (Toulouse-Blagnac)</strong> — IT support & technician role, handling infrastructure and user assistance.<br />
+                • <strong>Abalon (Communication agency)</strong> — Web developer (PHP), building and maintaining websites for clients.
+            </p>
+
+            <h1 class="text-xl mt-4">• Before</h1>
+            <p>Student working in IT alongside classes since I was 13.</p>
+
+            <hr class="mt-4 mr-auto ml-auto border-gray-300" width="100px" />
+
+        </p>
+    </div>
+</div>

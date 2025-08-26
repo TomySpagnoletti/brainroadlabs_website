@@ -6,7 +6,14 @@ import { Icon } from 'astro-icon/components';
   <button id="image-modal-close" class="absolute top-5 right-5 h-10 w-10 rounded-full bg-white/20 text-white flex items-center justify-center text-lg font-bold hover:bg-white/30 transition-colors z-10" aria-label="Close image view">
     <Icon name="heroicons:x-mark" class="h-6 w-6" />
   </button>
-  <div id="image-modal-container" class="flex items-center justify-center w-full h-full">
+  <div id="image-modal-container" class="relative flex items-center justify-center w-full h-full">
+    <!-- Navigation Buttons -->
+    <button id="image-modal-prev" class="absolute left-5 h-10 w-10 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-colors z-20" aria-label="Previous image">
+      <Icon name="heroicons:chevron-left" class="h-6 w-6" />
+    </button>
     <img id="image-modal-content" src="" alt="Enlarged view" class="w-[80vw] max-h-[90vh] object-contain rounded-lg" />
+    <button id="image-modal-next" class="absolute right-5 h-10 w-10 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-colors z-20" aria-label="Next image">
+      <Icon name="heroicons:chevron-right" class="h-6 w-6" />
+    </button>
   </div>
 </div>

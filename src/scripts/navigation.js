@@ -9,7 +9,7 @@ export function initNavigation() {
 
   // --- Core Navigation Elements ---
   const navHome = document.getElementById("nav-home");
-  const navProjects = document.getElementById("nav-projects");
+  const navExperience = document.getElementById("nav-xp");
   const navContact = document.getElementById("nav-contact");
   const navCredits = document.getElementById("nav-credits");
   const containers = document.querySelectorAll(".br_container");
@@ -196,8 +196,8 @@ export function initNavigation() {
       e.preventDefault();
       navigateToView(1);
     });
-  if (navProjects)
-    navProjects.addEventListener("click", (e) => {
+  if (navExperience)
+    navExperience.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
       navigateToView(-1);
@@ -206,13 +206,13 @@ export function initNavigation() {
     navContact.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
-      navigateToView(-6);
+      navigateToView(-2);
     });
   if (navCredits)
     navCredits.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
-      navigateToView(-7);
+      navigateToView(-3);
     });
 
   document.addEventListener("keydown", (e) => {
@@ -321,9 +321,11 @@ export function initNavigation() {
     // --- Graph-specific State ---
     const dataPoints = [];
     let gesturePhase = 'idle'; // 'idle', 'active', 'ending'
+    let isNavigationLocked = false; // Hard lock to prevent consecutive navigation gestures
     let currentGestureAction = "none"; // Can be 'none', 'navigate', or 'scroll-internal'
     let currentGestureTargetElement = null; // The scrollable element for the current gesture
     let gestureResetTimeout = null; // Timeout to reset the gesture state
+    let wheelEndTimeout = null; // Timeout to detect the end of a non-inertial scroll
 
     /**
      * Utility to create and style a DOM element.
@@ -443,7 +445,7 @@ export function initNavigation() {
           const isStandstill = avgBefore < GESTURE_END_THRESHOLD;
           const isSignificantRelativeChange = avgAfter > avgBefore * (1 + TREND_SIGNIFICANCE_THRESHOLD_RATIO);
 
-          if ((gesturePhase === 'idle' || gesturePhase === 'ending') && (isStandstill ? avgAfter > GESTURE_START_FROM_STANDSTILL_THRESHOLD : isSignificantRelativeChange)) {
+          if (!isNavigationLocked && (gesturePhase === 'idle' || gesturePhase === 'ending') && (isStandstill ? avgAfter > GESTURE_START_FROM_STANDSTILL_THRESHOLD : isSignificantRelativeChange)) {
             const trendStartPoint = afterEvents[0];
             trendStartPoint.flags.isSmoothedSignificantIncrease = true;
             gesturePhase = 'active';
@@ -468,6 +470,7 @@ export function initNavigation() {
             }
 
             if (currentGestureAction === "navigate") {
+              isNavigationLocked = true; // LOCK NAVIGATION
               if (scrollDirection < 0) {
                 updateAllContainersOrder("increment");
               } else {
@@ -481,6 +484,7 @@ export function initNavigation() {
               gesturePhase = 'idle';
               currentGestureAction = 'none';
               currentGestureTargetElement = null;
+              isNavigationLocked = false; // UNLOCK NAVIGATION
             }, 500);
 
           // Check for significant DECREASE (end of scroll gesture)
@@ -490,12 +494,19 @@ export function initNavigation() {
             gesturePhase = 'ending'; // Move to 'ending' phase, wait for idle to reset
             // The main gestureResetTimeout continues to act as a safety net
 
+          // Check for a "slow fade" end to the gesture, even if the decrease wasn't sharp
+          } else if (gesturePhase === 'active' && avgAfter < GESTURE_END_THRESHOLD) {
+            const trendEndPoint = afterEvents.length > 0 ? afterEvents[0] : pointToAnalyze;
+            trendEndPoint.flags.isSmoothedSignificantDecrease = true; // Mark it as a decrease
+            gesturePhase = 'ending';
+
           // Check if the gesture has fully ended and reset the state instantly
           } else if (gesturePhase === 'ending' && avgAfter < GESTURE_END_THRESHOLD) {
             clearTimeout(gestureResetTimeout); // The gesture ended cleanly, so we can clear the safety net
             gesturePhase = 'idle';
             currentGestureAction = 'none';
             currentGestureTargetElement = null;
+            isNavigationLocked = false; // UNLOCK NAVIGATION
           }
         }
         pointToAnalyze.processedForSmoothedTrend = true;
@@ -655,6 +666,31 @@ export function initNavigation() {
      * @param {EventTarget} target - The element that received the wheel event.
      */
     function plotDeltaY(currentDeltaY, target) {
+      // --- Intelligent Loop Termination ---
+      // If a zero-delta event comes in AND the smoothed value (green line) is already near zero,
+      // it means the gesture has fully ended. We stop processing to prevent the graph from
+      // advancing indefinitely while idle.
+      if (
+        currentDeltaY === 0 &&
+        dataPoints.length > 0 &&
+        Math.abs(dataPoints[dataPoints.length - 1].smoothedDeltaY) <
+          GESTURE_END_THRESHOLD
+      ) {
+        clearTimeout(wheelEndTimeout); // Stop any pending timeout
+        return; // Exit the function
+      }
+
+      // --- Non-Inertial Mouse Wheel Handling ---
+      // Clear any existing timeout, as a new wheel event has arrived.
+      clearTimeout(wheelEndTimeout);
+
+      // Set a new timeout. If no new wheel event arrives within this duration,
+      // we'll manually inject a zero-delta event to signal the end of the gesture.
+      // This is crucial for classic mice that don't have a natural "end" phase with inertia.
+      wheelEndTimeout = setTimeout(() => {
+        plotDeltaY(0, target); // Simulate the end of the scroll
+      }, 150); // 150ms is a reasonable delay to wait for the next scroll event.
+
       // If the current gesture is an internal scroll, perform it here.
       // This runs for every point in the gesture, ensuring smooth scrolling.
       if (

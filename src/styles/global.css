@@ -154,7 +154,7 @@ a:active {
   --viewport-height: 0;
 
   /* Max block count (secured by JS) */
-  --max-blocks: 10;
+  --max-blocks: 5;
 
   /* Gradient Colors */
   --circle-color1: 180, 240, 220;              /* Light mint/aqua */
@@ -247,7 +247,7 @@ a:active {
     transform: translateX(-50%);
     width: 20px;
     height: 3px;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.15);
     border-radius: 2px;
     cursor: ns-resize;
     z-index: 10;
@@ -255,7 +255,7 @@ a:active {
   }
 
   .br_container:hover::after {
-    background-color: rgba(0, 0, 0, 0.12);
+    background-color: rgba(0, 0, 0, 0.30);
   }
 }
 

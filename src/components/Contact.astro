@@ -1,20 +1,52 @@
-<div class="br_container" data-nav-id="nav-contact" style="--order: 7;">
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import x_logo from '../assets/images/x-logo.svg';
+import linkedin_logo from '../assets/images/linkedin-logo.svg';
+---
+
+<div class="br_container" data-nav-id="nav-contact" style="--order: 3;">
     <div class="overflow-auto h-full p-5">
         <div class="br_js_header-container flex flex-wrap items-center mb-2">
             <h1 class="br_js_title text-xl">Contact</h1>
             <div class="br_js_badge br_badge ml-auto">
                 <div class="br_badge_green"></div>
-                XXX
+                Available
             </div>
         </div>
         <p>
-            XXX
+            <h1 class="text-3xl text-center mt-8">
+                <a id="contact-email" href="#">Click to reveal the email!</a>
+            </h1>
+            <p class="text-center text-gray-400 text-sm mt-4">
+                <Icon name="heroicons:information-circle" class="h-5 w-5 inline align-bottom" /> Phone number coming soon.
+            </p>
+            <div class="flex justify-around mt-8">
+                <div>
+                    <a href="https://x.com/TomySpagnoletti" target="_blank" class="flex flex-col items-center">
+                        <Image src={x_logo} alt="X Logo" style="width: 35px;" loading="lazy" />
+                        @TomySpagnoletti
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.linkedin.com/in/tomyspagnolettiduval/" target="_blank" class="flex flex-col items-center">
+                        <Image src={linkedin_logo} alt="LinkedIn Logo" style="width: 35px;" loading="lazy" />
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
         </p>
     </div>
 </div>
 
-<!--
-
-    TODO: Remplir
-
--->
+<script>
+	const emailLink = document.getElementById('contact-email') as HTMLAnchorElement;
+	if (emailLink) {
+		emailLink.addEventListener('click', function(event) {
+			event.preventDefault();
+			const email = 'h' + 'e' + 'l' + 'l' + 'o' + '@' + 'b' + 'r' + 'a' + 'i' + 'n' + 'r' + 'o' + 'a' + 'd' + '.' + 'x' + 'y' + 'z';
+			this.href = 'mailto:' + email;
+			this.textContent = email;
+		}, { once: true }); // The listener will only run once.
+	}
+</script>
