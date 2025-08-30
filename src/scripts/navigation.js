@@ -189,31 +189,48 @@ export function initNavigation() {
     touchEndY = 0;
   }
 
-  // --- Event Listener Setup ---
+  // --- Link Navigation Setup ---
+  const viewOrders = {
+    home: 1,
+    experience: -1,
+    contact: -2,
+    credits: -3,
+  };
+
   if (navHome)
     navHome.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
-      navigateToView(1);
+      navigateToView(viewOrders.home);
     });
   if (navExperience)
     navExperience.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
-      navigateToView(-1);
+      navigateToView(viewOrders.experience);
     });
   if (navContact)
     navContact.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
-      navigateToView(-2);
+      navigateToView(viewOrders.contact);
     });
   if (navCredits)
     navCredits.addEventListener("click", (e) => {
       if (window.isModalOpen) return;
       e.preventDefault();
-      navigateToView(-3);
+      navigateToView(viewOrders.credits);
     });
+  
+  document.querySelectorAll('a[class*="link-"]').forEach((link) => {
+    const view = [...link.classList].find((c) => c.startsWith('link-'))?.split('-')[1];
+    if (!view || !viewOrders[view]) return;
+    link.addEventListener('click', (e) => {
+      if (window.isModalOpen) return;
+      e.preventDefault();
+      navigateToView(viewOrders[view]);
+    });
+  });
 
   document.addEventListener("keydown", (e) => {
     if (window.isModalOpen) return;
