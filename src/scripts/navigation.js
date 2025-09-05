@@ -33,7 +33,8 @@ export function initNavigation() {
    */
   function updateActiveNavItem() {
     document.querySelectorAll(".br-minimal-nav a").forEach((item) => {
-      item.classList.remove("active");
+     item.classList.remove("active");
+     item.removeAttribute("aria-current");
     });
 
     let activeContainer = null;
@@ -51,7 +52,8 @@ export function initNavigation() {
       if (navId) {
         const navItem = document.getElementById(navId);
         if (navItem) {
-          navItem.classList.add("active");
+         navItem.classList.add("active");
+         navItem.setAttribute("aria-current", "page");
         }
       }
     }

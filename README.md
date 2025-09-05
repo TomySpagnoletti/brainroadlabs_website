@@ -2,27 +2,26 @@
 
 ## 🚀 Overview
 
-BrainRoad Labs is a professional web and mobile development company providing innovative technical solutions. This repository contains the source code for our official website, featuring a unique interactive experience with custom scroll transitions, responsive design, and engaging animations.
-
-Our site serves as both a portfolio of our work and a demonstration of our technical capabilities through modern web implementation.
+This repository contains the source code for the official BrainRoad Labs website, a portfolio and technical showcase built with Astro, Tailwind CSS, and Vanilla JavaScript. It features a unique interactive experience with a custom scroll transition engine, responsive design, and engaging animations.
 
 ## ✨ Features
 
-- **Custom Scroll Experience**: Smooth transitions between content sections using a custom mechanism.
+- **Custom Scroll Engine**: Smooth transitions between content sections using a custom mechanism with inertia analysis for precise control.
 - **Adaptive Design**: Automatically adapts to portrait and landscape screen orientations.
 - **Interactive Elements**: Dynamic animated gradient background with a cursor-following bubble.
-- **Modern Technology Stack**: Built with Astro, Tailwind CSS, and Vanilla JavaScript.
+- **Modern Technology Stack**: Built with Astro, Tailwind CSS, and a modular Vanilla JavaScript architecture.
 - **Component-Based**: Modular design using Astro components.
-- **Splash Screen**: Initial loading animation using Lottie.
+- **Lottie Splash Screen**: An animated splash screen provides a polished entry experience.
+- **Image Gallery**: A full-screen modal for viewing zoomable images.
+- **Container Resizing**: Draggable resizing of content containers on desktop.
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Astro v5.10.0
-- **CSS Framework**: Tailwind CSS v4.1.1
-- **Tailwind Integration**: `@tailwindcss/vite` v4.1.1
-- **Icon Toolkit**: `astro-icon` (with Heroicons)
-- **JavaScript**: Vanilla JS with modular architecture
-- **Typography**: Apple SF Pro (Display)
+- **Framework**: Astro
+- **CSS Framework**: Tailwind CSS
+- **JavaScript**: Vanilla JS (ES Modules)
+- **Icons**: Astro Icon (with Heroicons)
+- **Animations**: Lottie
 - **Analytics**: Vercel Analytics & Speed Insights
 - **Node**: v20+ recommended
 
@@ -30,14 +29,14 @@ Our site serves as both a portfolio of our work and a demonstration of our techn
 
 ```
 /
-├── public/              # Static assets served as-is (e.g., favicon.svg)
+├── public/              # Static assets (favicon, animations, etc.)
 ├── src/
-│   ├── assets/          # Project assets (images, etc.)
-│   ├── components/      # Astro components (Home, Project, Contact, etc.)
+│   ├── assets/          # Project assets (images, fonts)
+│   ├── components/      # Astro components (Home, Experience, Contact, etc.)
 │   ├── layouts/         # Layout templates (Layout.astro)
 │   ├── pages/           # Page definitions (index.astro)
-│   ├── scripts/         # JavaScript modules (e.g., navigation.js, interactiveBubble.js)
-│   └── styles/          # Global styles (global.css)
+│   ├── scripts/         # JavaScript modules (navigation.js, modal.js, etc.)
+│   └── styles/          # Global styles (global.css, fonts.css)
 ├── astro.config.mjs     # Astro configuration
 ├── tailwind.config.js   # Tailwind CSS configuration
 └── package.json         # Project dependencies and scripts
@@ -57,25 +56,10 @@ All commands are run from the root of the project, from a terminal:
 
 ## 🎯 Design Philosophy
 
-Our website emphasizes:
 - **Memorable Experience**: Creating a strong first impression through innovative navigation and visuals.
 - **Visual Consistency**: Maintaining a cohesive aesthetic with smooth transitions and elegant design.
 - **Performance**: Ensuring fast loading times and smooth animations.
-- **Accessibility**: Striving to support different devices and screen orientations effectively.
-
-## 👥 Target Audience
-
-- **Potential Clients**: Businesses seeking web/mobile development services.
-- **Technical Partners**: Technology companies looking for collaborations.
-- **Talent**: Professionals interested in work opportunities.
-- **Tech Community**: Developers interested in innovative approaches.
-
-## 📋 Development Guidelines
-
-- **Styling**: Primarily use Tailwind CSS classes; supplement with custom CSS in `src/styles/global.css` for complex effects and theming via CSS custom properties.
-- **Components**: Follow Astro component structure for modularity.
-- **Responsiveness**: Implement orientation-specific layouts (landscape/portrait) using Tailwind variants and custom CSS.
-- **JavaScript**: Organize client-side code in modular ES6 modules (like `navigation.js`), initialized from `src/scripts/index.js`.
+- **Intuitive UX**: Designing interactions that feel natural and predictable across all devices.
 
 ## 📄 License
 

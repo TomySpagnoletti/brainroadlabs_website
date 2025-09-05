@@ -3,15 +3,16 @@
 ## Technologies Used
 
 ### Core Framework
-- **Astro v5.10.0**: Static site builder for component-based development.
+- **Astro**: Static site builder for component-based development.
 
 ### CSS & Styling
-- **Tailwind CSS v4.1.1**: Utility-first CSS framework.
-  - Integrated via `@tailwindcss/vite` v4.1.1.
+- **Tailwind CSS**: Utility-first CSS framework.
+  - Integrated via `@tailwindcss/vite`.
   - Configuration in `tailwind.config.js` includes custom `portrait` and `landscape` screen variants.
+  - These variants are defined but used sparingly; orientation responsiveness is handled primarily via custom CSS media queries in `src/styles/global.css`.
 - **Custom CSS**: Extensive custom styles in `src/styles/global.css` for:
-  - Base styling, typography: Apple SF Pro (Display).
-  - Splash screen, animated badges.
+  - Base styling and typography (SF Pro).
+  - Splash screen and animated badges.
   - Complex gradient background with SVG filters (`#goo`) and animations.
   - Core layout mechanics for section containers (`.br_container`) using CSS custom properties (`--order`, `--viewport-height`, etc.) for 3D-like transitions.
   - Floating navigation menu styling.
@@ -19,21 +20,20 @@
 ### JavaScript
 - **Vanilla JavaScript (ES Modules)**: Used for all client-side interactions.
   - Main entry point: `src/scripts/index.js`.
-  - Modules for:
-    - DOM initialization (`initDOM.js`): Sets CSS variables like `--viewport-height`, `--max-blocks`, and initial container classes.
-    - Interactive background bubble (`interactiveBubble.js`).
-    - Responsive header adjustments (`responsiveHeaders.js`).
-    - Splash screen handling (`splashScreen.js`).
-    - Scroll transition logic:
-    - `src/scripts/navigation.js`: Manages the core navigation logic by manipulating CSS `--order` properties.
-    - **Lottie Animations**: The splash screen is now a Lottie animation handled by `src/components/LottieSplash.astro` and the `@lottiefiles/dotlottie-web` package.
+  - **`navigation.js`**: Manages the core navigation logic, including menu clicks, keyboard events, touch gestures, and a sophisticated scroll inertia analysis engine for mouse wheel events.
+  - **`initDOM.js`**: Sets initial CSS variables like `--viewport-height` and container classes.
+  - **`interactiveBubble.js`**: Controls the cursor-following background bubble.
+  - **`responsiveHeaders.js`**: Adjusts header layouts to prevent overlap.
+  - **`modal.js`**: Handles the image gallery modal.
+  - **`resize.js`**: Implements draggable resizing of containers on desktop.
+- **Lottie Animations**: The splash screen is a Lottie animation handled by `src/components/LottieSplash.astro` and the `@lottiefiles/dotlottie-web` package.
 
 ### UI & UX
-- **Icons**: `astro-icon` v1.1.5 with `@iconify-json/heroicons` v1.2.2.
+- **Icons**: `astro-icon` with `@iconify-json/heroicons`.
 
 ### Analytics & Monitoring
-- **Vercel Analytics**: `@vercel/analytics` v1.5.0.
-- **Vercel Speed Insights**: `@vercel/speed-insights` v1.2.0.
+- **Vercel Analytics**: `@vercel/analytics`.
+- **Vercel Speed Insights**: `@vercel/speed-insights`.
 
 ### Build Tools & Environment
 - **Vite**: Frontend build tool (via Astro).
@@ -48,12 +48,12 @@
 - Preview: `npm run preview`
 
 ### Project Structure
-- `src/components/`: Astro components for sections (Home, Project, Contact, Credits, Unlck-u).
+- `src/components/`: Astro components for sections (Home, Experience, Contact, etc.).
 - `src/layouts/`: Main layout (`Layout.astro`).
 - `src/pages/`: Astro pages (`index.astro`).
-- `src/assets/`: Static assets (e.g., images, not explicitly seen but typical).
-- `public/`: Publicly served static files (e.g., `favicon.svg`).
-- `src/styles/`: Global CSS (`global.css`).
+- `src/assets/`: Static assets (fonts, images).
+- `public/`: Publicly served static files.
+- `src/styles/`: Global CSS (`global.css`, `fonts.css`).
 - `src/scripts/`: Client-side JavaScript modules.
 
 ## Technical Constraints & Considerations
@@ -67,37 +67,33 @@
 - Vercel Speed Insights is integrated for monitoring.
 
 ### Accessibility
-- Custom scroll behavior needs careful consideration for accessibility (keyboard navigation, screen readers).
-- Current inline script in `Layout.astro` includes keyboard (arrow key) navigation.
+- Custom scroll behavior requires careful consideration for accessibility. Keyboard navigation (arrow keys) is implemented.
 
 ## Dependencies (from `package.json`)
 
 ### Main Dependencies
-- `astro`: ^5.10.0
-- `@lottiefiles/dotlottie-web`: ^0.46.0
-- `tailwindcss`: ^4.1.1
-- `@tailwindcss/vite`: ^4.1.1
-- `astro-icon`: ^1.1.5
-- `@vercel/analytics`: ^1.5.0
-- `@vercel/speed-insights`: ^1.2.0
+- `astro`
+- `@lottiefiles/dotlottie-web`
+- `tailwindcss`
+- `@tailwindcss/vite`
+- `astro-icon`
+- `astro-seo`
+- `@vercel/analytics`
+- `@vercel/speed-insights`
 
 ### Dev Dependencies
-- `@iconify-json/heroicons`: ^1.2.2
+- `@iconify-json/heroicons`
+- `terser`
 
 ## Tool Usage Patterns
 
 ### CSS Methodology
 - Primarily Tailwind CSS utility classes.
 - Extensive custom CSS in `src/styles/global.css` for complex layouts, animations, and theming via CSS custom properties.
-- Responsive design heavily relies on `@media (orientation: landscape/portrait)` and custom screen variants in Tailwind.
+- Responsive design heavily relies on `@media (orientation: landscape/portrait)`.
 
 ### JavaScript Organization
-- Modular, with an `index.js` initializing various features.
-- DOM manipulation for dynamic styling and behavior (e.g., setting CSS variables, class toggling).
-- Event listeners for user interactions (scroll, touch, mousemove, resize, keydown) and lifecycle events (`DOMContentLoaded`).
-- The scroll/navigation logic is now centralized in `src/scripts/navigation.js`, which is initialized from `index.js`.
-- The splash screen is implemented using Lottie.
-
-### Build and Deployment
-- Astro handles the build process.
-- Vercel tools suggest potential deployment on Vercel.
+- Modular, with an `index.js` initializing all features.
+- DOM manipulation for dynamic styling and behavior.
+- Event listeners for user interactions (click, keydown, wheel, touch, mousemove, resize).
+- The core navigation logic is centralized in `src/scripts/navigation.js`.
